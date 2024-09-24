@@ -6,7 +6,7 @@
       :style="computedStyling[lvl.value]"
       class="leveldescription"
     >
-      <h2 @click="selectLevel(lvl.value)">Level {{ lvl.value }}</h2>
+      <h3 @click="selectLevel(lvl.value)">Level {{ lvl.value }}</h3>
       <span>Employees in {{ dimension.name }} level {{ lvl.value }}...</span>
       <ul>
         <li v-for="c in lvl.capabilities">{{ c }}</li>
@@ -61,10 +61,8 @@ watch(level, () => {});
 </script>
 
 <style scoped>
-h2 {
+h3 {
   color: var(--color-heading);
-}
-h1 {
   cursor: pointer;
 }
 .leveldescriptioncontainer {
@@ -76,7 +74,9 @@ h1 {
   width: 100%;
   border: solid 1px var(--color-border);
   border-radius: 5px;
-  background-color: var(--color-background);
+  background-color: var(--color-background-soft);
   position: absolute;
+  padding: 5px;
+  padding-left: 15px;
 }
 </style>

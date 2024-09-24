@@ -10,11 +10,16 @@ import dimensions from "./dimensions";
       <Navigation msg="Level of Mastery" />
 
       <nav>
+        <span>Introduction</span>
         <RouterLink to="/">Introduction</RouterLink>
-        <RouterLink v-for="d in dimensions" :to="`/dimension/${d.id}`">
+        <span v-for="d in dimensions">
           {{ d.name }}
-        </RouterLink>
+          <RouterLink :to="`/dimension/${d.id}`">Level</RouterLink>
+          <RouterLink :to="`/reasoning/${d.id}`">Track Record</RouterLink>
+        </span>
+        <span>Overall</span>
         <RouterLink to="/weight">Weight</RouterLink>
+        <RouterLink to="/summary">Summary</RouterLink>
       </nav>
     </div>
   </header>

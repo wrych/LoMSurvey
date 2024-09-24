@@ -1,7 +1,7 @@
 <template>
   <div class="levelselectorcontianer">
     <div class="titlecontainer">
-      <h1 class="green">Dimension {{ props.dimension.name }}</h1>
+      <h2 class="highlight">Dimension {{ props.dimension.name }}</h2>
     </div>
     <div>
       <LevelDescriptions v-model="value" :dimension="props.dimension" />
@@ -17,16 +17,22 @@
 import LevelSlider from "./LevelSlider.vue";
 import NumberInput from "./NumberInput.vue";
 import LevelDescriptions from "./LevelDescriptions.vue";
+import { type Dimension } from "@/dimensions";
+import type { PropType } from "vue";
 
 const value = defineModel();
 const props = defineProps({
-  dimension: {},
+  dimension: {
+    type: Object as PropType<Dimension>,
+    required: true,
+  },
 });
 </script>
 
 <style scoped>
 .levelselectorcontianer {
   width: 100%;
+  max-width: 581px;
   height: 100vh;
   display: grid;
   grid-template-columns: 5fr 1fr;

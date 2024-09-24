@@ -1,46 +1,61 @@
 <template>
-  <div class="about">
+  <main>
     <div class="main">
-      <h1>Hello World!</h1>
+      <h2 class="highlight">Dimension Weights</h2>
+      <span>
+        Please assess how much each dimension matters for your specific role and
+        position in the company.
+      </span>
+      <br />
+      <br />
       <div>
         <SliderWithValue
           v-for="dimension in dimensions"
-          :label="`Dimension ${dimension.name} (${dimension.id})`"
-          v-model="weights[dimension.id].value"
+          :label="`Dimension ${dimension.name}`"
+          v-model.number="weights[dimension.id as dimensionId]"
         />
       </div>
+      Please provide the reasoning for your weights.
+      <textarea
+        class="reasoning"
+        v-model="reasonings.weights"
+        placeholder="Please provide reasoning for your weights..."
+      />
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">
 import SliderWithValue from "@/components/SliderWithValue.vue";
-import { watch, ref, nextTick, type Ref } from "vue";
-import dimensions, { weights } from "@/dimensions";
-interface Dimension {
-  value: number;
-  name: string;
-  short: string;
-}
+import { watch, nextTick } from "vue";
+import dimensions, {
+  weights,
+  reasonings,
+  type dimensionId,
+} from "@/dimensions";
 
 let disableWatch = false;
 
-const requireChange = (dimension: Dimension, change: number): number => {
-  const calcValue = parseFloat(dimension.value) + change;
+const requireChange = (weightIndex: string, change: number): number => {
+  const currentValue = weights.value[weightIndex as dimensionId];
+  if (!currentValue) {
+    throw Error("weights must not be undefined");
+  }
+  const calcValue = currentValue + change;
   const value = Math.min(Math.max(calcValue, 0), 100);
-  dimension.value = value;
+  weights.value[weightIndex as dimensionId] = value;
   return calcValue - value;
 };
 
-const changeValue = (changeableWeights: Dimension[], change: number): void => {
+const changeValue = (changeableWeights: string[], change: number): void => {
   if (change === 0) return;
   let remainder = 0;
-  let changeable: Dimension[] = [];
+  let changeable: string[] = [];
   let step = change / changeableWeights.length;
-  changeableWeights.forEach((d) => {
-    const r = requireChange(d, step);
+  changeableWeights.forEach((w) => {
+    const r = requireChange(w, step);
     if (r === 0) {
-      changeable.push(d);
+      changeable.push(w);
     } else {
       remainder += r;
     }
@@ -48,32 +63,39 @@ const changeValue = (changeableWeights: Dimension[], change: number): void => {
   changeValue(changeable, remainder);
 };
 
-for (let w in weights) {
+for (let w in weights.value) {
   watch(
-    () => weights[w],
+    () => weights.value[w as dimensionId],
     (newValue, oldValue) => {
+      if (!newValue || !oldValue) {
+        throw Error("weights must not be undefined");
+      }
       if (disableWatch) return;
       disableWatch = true;
       const change = oldValue - newValue;
-      const changeable = Object.fromEntries(Object.entries(weights).filter(
-        ([key, value]) => key !== value
-      );
+      const changeable = Object.keys(weights.value).filter((key) => key !== w);
       changeValue(changeable, change);
       nextTick(() => {
         disableWatch = false;
       });
     }
   );
-});
+}
 </script>
 
 <style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr;
-  }
+.main {
+  width: 100%;
+  max-width: 581px;
+  max-height: 100vh;
+  position: relative;
+}
+
+.reasoning {
+  width: 100%;
+  min-height: 150px;
+  border-color: var(--color-border);
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
 }
 </style>
