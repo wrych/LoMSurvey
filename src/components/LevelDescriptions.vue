@@ -20,13 +20,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from "vue";
+import { type Dimension } from "@/dimensions";
+import { computed, watch, type ModelRef, type PropType } from "vue";
 
 const props = defineProps({
-  dimension: {},
+  dimension: {
+    type: Object as PropType<Dimension>,
+    required: true,
+  },
 });
-const level = defineModel();
-const selectLevel = (selectedLevel: Number) => {
+const level: ModelRef<number | undefined> = defineModel();
+const selectLevel = (selectedLevel: number) => {
   level.value = selectedLevel;
 };
 
@@ -35,7 +39,10 @@ const levels = dimension.levels.sort((a, b) => b.value - a.value);
 
 const computedStyling = computed(() => {
   const vs: Record<string, string> = {};
-  const cLvl = parseFloat(level.value);
+  const cLvl = level.value;
+  if (!cLvl) {
+    throw Error("level must not be undefined");
+  }
   const lvlOffset = 1;
   let nTop = 0;
   let nBottom = levels.filter((l) => l.value < cLvl - 1).length;

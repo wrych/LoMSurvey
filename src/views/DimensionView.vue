@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import LevelSelector from "@/components/LevelSelector.vue";
 import { useRoute } from "vue-router";
-import dimensions, { values, type dimensionId } from "@/dimensions";
+import dimensions, {
+  values,
+  type Dimension,
+  type dimensionId,
+} from "@/dimensions";
 import { ref, toRef, watch } from "vue";
 
 const route = useRoute();
-const dimension = ref<{} | undefined>(undefined);
+const dimension = ref<Dimension | undefined>(undefined);
 let value = ref<number | undefined>(undefined);
 
 const updateRefs = () => {

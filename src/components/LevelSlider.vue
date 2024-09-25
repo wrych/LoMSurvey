@@ -10,15 +10,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, type ModelRef } from "vue";
 
-const model = defineModel();
+const model: ModelRef<number | undefined> = defineModel();
 
 const updatemodel = (event: Event) => {
-  model.value = event.target.value / 10;
+  if (!event.target) {
+    console.warn("event.target is null");
+    return;
+  }
+  const input = event.target as HTMLInputElement;
+  model.value = parseFloat(input.value) / 10;
 };
 
 const value = computed(() => {
+  if (!model.value) {
+    console.warn("unexpected undefined value provided");
+    return model.value;
+  }
   return `${model.value * 10}`;
 });
 </script>
