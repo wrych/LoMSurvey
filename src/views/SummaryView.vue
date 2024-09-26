@@ -3,7 +3,7 @@
     <div class="main">
       <h2 class="highlight">Level of Mastery (LoM)</h2>
       <div class="valuecontainer">
-        <span>Overall</span>
+        <span>Overall:</span>
         <span class="highlight lom">{{ overallLom }}</span>
       </div>
       <div v-for="d in dimensions" class="dimensioncontainer">
@@ -73,6 +73,7 @@ const reasoning_texts = computed(() => {
   height: 100vh;
   position: relative;
 }
+h2,
 h3 {
   padding-top: 20px;
 }
@@ -90,6 +91,7 @@ h3 {
   right: 0px;
   display: grid;
   grid-template-columns: 5fr 1fr;
+  align-items: end;
 }
 .weightcontainer {
   width: 400px;
@@ -97,6 +99,7 @@ h3 {
   grid-template-columns: 5fr 1fr;
 }
 .lom {
+  font-size: xx-large;
   font-weight: 700;
 }
 .reasoning {
