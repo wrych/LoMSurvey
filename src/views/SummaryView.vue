@@ -57,7 +57,7 @@ const overallLom = computed(() => {
 const reasoning_texts = computed(() => {
   type TextType = Record<dimensionWeightId, string | undefined>;
   const texts: TextType = {} as TextType;
-  (Object.keys(reasonings) as dimensionWeightId[]).forEach((key) => {
+  (Object.keys(reasonings.value) as dimensionWeightId[]).forEach((key) => {
     texts[key as dimensionWeightId] = reasonings.value[key as dimensionWeightId]
       ? reasonings.value[key as dimensionWeightId]
       : "No reasoning provided...";
@@ -90,7 +90,7 @@ h3 {
   top: 0px;
   right: 0px;
   display: grid;
-  grid-template-columns: 5fr 1fr;
+  grid-template-columns: 4fr 2fr;
   align-items: end;
 }
 .weightcontainer {
