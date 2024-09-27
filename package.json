@@ -1,36 +1,47 @@
 {
-  "name": "survey",
+  "name": "lomsurvey",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
+  "description": "LoM Survey",
+  "keywords": [
+    "level of mastery",
+    "survery",
+    "lom"
+  ],
+  "author": {
+    "name": "Andy Moesch",
+    "email": "andy.moesch@dectris.com",
+    "url": "https://www.dectris.com/"
+  },
+  "homepage": "https://www.dectris.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wrych/LoMSurvey"
+  },
+  "bugs": {
+    "url": "https://github.com/wrych/LoMSurvey/issues"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build --force",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "build": "npm run build --prefix backend && npm run build --prefix frontend"
   },
-  "dependencies": {
-    "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
-  },
+  "license": "Unlicense",
   "devDependencies": {
+    "@eslint/js": "^9.9.1",
     "@rushstack/eslint-patch": "^1.8.0",
-    "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^20.14.5",
-    "@vitejs/plugin-vue": "^5.0.5",
+    "@types/eslint__js": "^8.42.3",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
-    "@vue/tsconfig": "^0.5.1",
+    "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.23.0",
-    "npm-run-all2": "^6.2.0",
     "prettier": "^3.2.5",
-    "typescript": "~5.4.0",
-    "vite": "^5.3.1",
-    "vite-plugin-vue-devtools": "^7.3.1",
-    "vue-tsc": "^2.0.21"
-  }
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.3.0"
+  },
+  "dependencies": {}
 }
