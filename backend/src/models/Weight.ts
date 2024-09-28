@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import ORM from "../data/ORM.js";
-import User from "./User.js";
 import Dimension from "./Dimension.js";
+import AssessmentSession from "./AssessmentSession.js";
 
 const Weight = ORM.define("Weight", {
   id: {
@@ -14,15 +14,15 @@ const Weight = ORM.define("Weight", {
     type: DataTypes.FLOAT,
     allowNull: true,
   },
-  user: {
+  AssessmentSessionId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: User,
+      model: AssessmentSession,
       key: "id",
     },
   },
-  dimension: {
+  dimensionId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {

@@ -1,34 +1,38 @@
 import { DataTypes } from "sequelize";
 import ORM from "../data/ORM.js";
-import Dimension from "./Dimension.js";
-import AssessmentSession from "./AssessmentSession.js";
+import State from "./State.js";
+import Assessment from "./Assessment.js";
 
-const Value = ORM.define("Value", {
+const Permission = ORM.define("Permission", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
   },
-  value: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
+  title: {
+    type: DataTypes.TEXT,
+    allowNull: false,
   },
-  assessmentSessionId: {
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  assessment: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: AssessmentSession,
+      model: Assessment,
       key: "id",
     },
   },
-  dimensionId: {
+  stateId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: Dimension,
+      model: State,
       key: "id",
     },
   },
 });
-export default Value;
+export default Permission;

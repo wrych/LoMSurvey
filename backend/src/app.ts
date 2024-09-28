@@ -8,12 +8,12 @@ import session from "express-session";
 import pluralize from "pluralize";
 import connectSessionSequelize from "connect-session-sequelize";
 
-import setupGoogleAuth from "./services/googleAuth.js";
-import apiRouter from "./routes/api/api.js";
-import authRouter from "./routes/auth.js";
-import ORM from "./data/ORM.js";
-import syncDatabase, { runInitialSetup } from "./initialSetup.js";
-import { setupPassport } from "./services/passport.js";
+import setupGoogleAuth from "@/services/googleAuth.js";
+import apiRouter from "@/routes/api/api.js";
+import authRouter from "@/routes/auth.js";
+import ORM from "@/data/ORM.js";
+import syncDatabase, { runInitialSetup } from "@/initialSetup.js";
+import { setupPassport } from "@/services/passport.js";
 
 dotenv.config();
 

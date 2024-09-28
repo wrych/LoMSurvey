@@ -3,7 +3,7 @@ import ORM from "../data/ORM.js";
 import User from "./User.js";
 import Assessment from "./Assessment.js";
 
-const Reviewer = ORM.define("Reviewer", {
+const RoleHolder = ORM.define("RoleHolder", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -11,14 +11,6 @@ const Reviewer = ORM.define("Reviewer", {
     autoIncrement: true,
   },
   user: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: User,
-      key: "id",
-    },
-  },
-  reviewee: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -35,4 +27,4 @@ const Reviewer = ORM.define("Reviewer", {
     },
   },
 });
-export default Reviewer;
+export default RoleHolder;

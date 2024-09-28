@@ -1,8 +1,10 @@
-import Dimension from "../models/Dimension.js";
+import Assessment, { AssessmentAttributes } from "@/models/Assessment.js";
 
-const findAll = async (): Promise<Dimension[]> => {
-  const dimensions: Dimension[] = await Dimension.findAll();
-  return dimensions;
+const create = async (
+  assessment: AssessmentAttributes
+): Promise<Assessment> => {
+  const newAssessment = await Assessment.create(assessment);
+  return newAssessment;
 };
 
-export { findAll };
+export { create };

@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import * as assessmentService from "../../services/assessment.js";
+import * as assessmentService from "../../services/dimension.js";
 import { ensureAuthenticated } from "./auth.js";
 
 const router = express.Router();

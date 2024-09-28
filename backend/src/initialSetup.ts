@@ -1,35 +1,31 @@
-import ORM from "./data/ORM.js";
-import Migration, { MigrationSteps } from "./models/Migration.js";
+import ORM from "@/data/ORM.js";
+import { MigrationStep } from "@/models/Migration.js";
+import {
+  isMigrationComplete,
+  markMigrationComplete,
+} from "@/services/migration.js";
+import { setupAll } from "./setup/all.js";
 
 const syncDatabase = async () => {
-  console.log("Syncing database...");
+  console.log("syncing database...");
   try {
     await ORM.sync({ alter: true });
   } catch (error) {
-    console.error("Error creating database tables:", error);
+    console.error("error creating database tables:", error);
   }
 };
 
-const markMigrationComplete = async (): Promise<void> => {
-  await Migration.create({
-    migrationName: MigrationSteps.initial,
-    completedAt: new Date(),
-  });
-};
-
 const runInitialSetup = async (env: string): Promise<void> => {
-  const existingMigration = await Migration.findOne({
-    where: { migrationName: MigrationSteps.initial },
-  });
+  if (!(await isMigrationComplete(MigrationStep.initial))) {
+    console.log("running initial setup...");
 
-  if (!existingMigration) {
-    console.log("Running initial setup...");
+    await setupAll();
 
-    await markMigrationComplete();
+    await markMigrationComplete(MigrationStep.initial);
 
-    console.log("Initial setup completed.");
+    console.log("initial setup completed.");
   } else {
-    console.log("Initial setup already completed, skipping.");
+    console.log("initial setup already completed, skipping.");
   }
 };
 

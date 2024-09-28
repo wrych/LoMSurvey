@@ -1,23 +1,19 @@
 import { DataTypes, Model } from "sequelize";
 import ORM from "../data/ORM.js";
-import State from "./State.js";
 
-interface AssessmentAttributes {
+export interface RoleAttributes {
   id?: number;
   title: string;
-  stateId: number;
+  description: string;
 }
 
-class Assessment
-  extends Model<AssessmentAttributes>
-  implements AssessmentAttributes
-{
+class Role extends Model<RoleAttributes> implements RoleAttributes {
   declare id: number;
   declare title: string;
-  declare stateId: number;
+  declare description: string;
 }
 
-Assessment.init(
+Role.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -29,19 +25,15 @@ Assessment.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    stateId: {
-      type: DataTypes.INTEGER,
+    description: {
+      type: DataTypes.TEXT,
       allowNull: false,
-      references: {
-        model: State,
-        key: "id",
-      },
     },
   },
   {
     sequelize: ORM,
-    modelName: "Assessment",
+    modelName: "Role",
   }
 );
-export default Assessment;
-export { AssessmentAttributes };
+
+export default Role;
