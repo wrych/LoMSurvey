@@ -23,9 +23,9 @@ const runInitialSetup = async (env: string): Promise<void> => {
 
     await markMigrationComplete(MigrationStep.initial);
 
-    console.log("initial setup completed.");
+    console.log("initial setup complete...");
   } else {
-    console.log("initial setup already completed, skipping.");
+    console.log("initial setup already completed, skipping...");
   }
 };
 

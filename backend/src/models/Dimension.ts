@@ -7,6 +7,8 @@ export interface DimensionAttributes {
   title: string;
   description: string;
   impact: string;
+  min: number;
+  max: number;
   assessmentId: number;
 }
 
@@ -18,6 +20,8 @@ class Dimension
   declare title: string;
   declare description: string;
   declare impact: string;
+  declare min: number;
+  declare max: number;
   declare assessmentId: number;
 }
 
@@ -39,6 +43,14 @@ Dimension.init(
     },
     impact: {
       type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    min: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    max: {
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     assessmentId: {
