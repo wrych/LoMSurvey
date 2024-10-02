@@ -4,7 +4,14 @@
       <h2 class="highlight">Level of Mastery Determination</h2>
       <div v-if="user">
         <div v-if="states">
-          <p v-for="state in states.states">{{ state.title }}</p>
+          <div v-for="state in states.states">
+            <p>{{ state.title }}</p>
+            <ul v-if="assessments">
+              <li v-for="assessment in getAssessments(state.id).assessments">
+                {{ assessment.title }}
+              </li>
+            </ul>
+          </div>
         </div>
         <div v-else>
           <p>Loading states...</p>
@@ -18,6 +25,7 @@
 </template>
 
 <script setup lang="ts">
+import { Assessments } from "@/models/Assessment";
 import { useAssessmentService } from "@/services/assessment";
 import { useAuthService } from "@/services/auth";
 
@@ -25,6 +33,14 @@ const authService = useAuthService();
 const user = authService.getUser();
 const assessmentService = useAssessmentService();
 const states = assessmentService.getAllStates();
+const assessments = assessmentService.getAssessmentsByStates();
+
+const getAssessments = (stateId: number): Assessments => {
+  if (assessments.value && assessments.value[stateId]) {
+    return assessments.value[stateId];
+  }
+  return new Assessments([]);
+};
 </script>
 
 <style scoped>

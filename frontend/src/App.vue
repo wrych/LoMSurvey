@@ -4,29 +4,16 @@
       <InfoBar />
     </header>
     <div class="content">
-      <div class="navigation">
-        <nav>
-          <span>Introduction</span>
-          <RouterLink to="/">Introduction</RouterLink>
-          <span v-for="d in dimensions">
-            {{ d.name }}
-            <RouterLink :to="`/dimension/${d.id}`">Level</RouterLink>
-            <RouterLink :to="`/reasoning/${d.id}`">Track Record</RouterLink>
-          </span>
-          <span>Overall</span>
-          <RouterLink to="/weight">Weight</RouterLink>
-          <RouterLink to="/summary">Summary</RouterLink>
-        </nav>
-      </div>
+      <Navigation />
       <RouterView />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import dimensions from "./dimensions";
+import { RouterView } from "vue-router";
 import InfoBar from "./components/InfoBar.vue";
+import Navigation from "./components/Navigation.vue";
 </script>
 
 <style scoped>

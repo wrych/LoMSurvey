@@ -3,7 +3,7 @@ import ORM from "../data/ORM.js";
 
 export interface AssessmentSessionAttributes {
   id?: number;
-  assessment: number;
+  assessmentId: number;
 }
 
 class AssessmentSession
@@ -11,7 +11,7 @@ class AssessmentSession
   implements AssessmentSessionAttributes
 {
   declare id: number;
-  declare assessment: number;
+  declare assessmentId: number;
 }
 
 AssessmentSession.init(
@@ -22,7 +22,7 @@ AssessmentSession.init(
       allowNull: false,
       autoIncrement: true,
     },
-    assessment: {
+    assessmentId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

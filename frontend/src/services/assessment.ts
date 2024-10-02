@@ -1,4 +1,4 @@
-import { Assessments, type Assessment } from "@/models/Assessment";
+import { Assessment, Assessments } from "@/models/Assessment";
 import { State, type States } from "@/models/State";
 import {
   useAssessmentRepository,
@@ -13,41 +13,39 @@ class AssessmentService {
   private authService: AuthService;
   private user: Ref<AuthUser | null>;
 
-  private orderStates = (
-    assessmentsByStates: Ref<Record<number, Assessments> | undefined>,
-    states: Ref<States | undefined>,
-    assessments: Ref<Assessments | undefined>
-  ): void => {
+  private collectByState = (
+    assessments: Ref<Assessments | undefined>,
+    assessmentsByStates: Ref<Record<number, Assessments> | undefined>
+  ) => {
     if (assessments.value) {
-      assessments.value = {} as Assessments;
-      if (!states.value) {
-        states.value.states.forEach((state) => {
-          assessments.value[state.id] = new Assessments(
-            assessments.value.assessments.filter(
-              (assessment: Assessment) => assessment.stateId === state.id
-            )
-          );
-        });
+      const assessmentDict: Record<number, Assessment[]> = {};
+      assessments.value.assessments.forEach((assessment: Assessment) => {
+        if (!assessmentDict[assessment.stateId]) {
+          assessmentDict[assessment.stateId] = [];
+        }
+        assessmentDict[assessment.stateId].push(assessment);
+      });
+      assessmentsByStates.value = {};
+      for (const [stateId, assessments] of Object.entries(assessmentDict)) {
+        assessmentsByStates.value[parseInt(stateId)] = new Assessments(
+          assessments
+        );
       }
     }
   };
 
-  getAssessmentsByStates = (): Ref<Assessments | undefined> => {
-    const assessmentsByStates = ref<Record<string, Assessments> | undefined>(
+  getAssessmentsByStates = (): Ref<Record<number, Assessments> | undefined> => {
+    const assessments = this.getAllAssessments();
+    const assessmentsByStates = ref<Record<number, Assessments> | undefined>(
       undefined
     );
-    const assessments = this.getAllAssessments();
-    watch(assessments, () => {
-      const states = this.getAllStates();
-      if (!states.value) {
-        const unwatch = watch(states, () => {
-          this.orderStates(assessmentsByStates, states, assessments);
-          unwatch();
-        });
+    watch(
+      () => assessments.value,
+      () => {
+        this.collectByState(assessments, assessmentsByStates);
       }
-      this.orderStates(assessmentsByStates, states, assessments);
-    });
-    return assessments;
+    );
+    return assessmentsByStates;
   };
 
   getAllAssessments = (): Ref<Assessments | undefined> => {

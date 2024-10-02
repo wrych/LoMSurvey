@@ -1,11 +1,4 @@
 import express, { NextFunction, Request, Response } from "express";
-
-declare module "express-serve-static-core" {
-  interface Request {
-    assessment?: Assessment;
-    dimension?: Dimension;
-  }
-}
 import * as dimensionService from "@/services/dimension.js";
 import * as assessmentService from "@/services/assessment.js";
 import * as levelService from "@/services/level.js";

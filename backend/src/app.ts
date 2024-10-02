@@ -43,6 +43,15 @@ app.use(
     }),
   })
 );
+
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  var msgs = req.session.messages || [];
+  res.locals.messages = msgs;
+  res.locals.hasMessages = !!msgs.length;
+  req.session.messages = [];
+  next();
+});
+
 setupPassport(app);
 setupGoogleAuth(app);
 

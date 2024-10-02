@@ -1,10 +1,11 @@
 import passport from "passport";
 import {
+  GoogleCallbackParameters,
   Strategy as GoogleStrategy,
   Profile,
   VerifyCallback,
 } from "passport-google-oauth20";
-import { Express } from "express";
+import { Express, Request } from "express";
 
 import * as userService from "../services/user.js";
 import User from "../models/User.js";
@@ -15,12 +16,6 @@ interface GoogleAuthConfig {
   callbackURL: string;
 }
 
-interface GoogleProfile extends Profile {
-  id: string;
-  emails: { value: string; verified: boolean }[];
-  name: { familyName: string; givenName: string };
-}
-
 const setupGoogleAuth = (app: Express) => {
   passport.use(
     new GoogleStrategy(
@@ -28,25 +23,37 @@ const setupGoogleAuth = (app: Express) => {
         clientID: process.env.GOOGLE_CLIENT_ID!,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
         callbackURL: "/_auth/google/callback",
-      } as GoogleAuthConfig,
+        passReqToCallback: true,
+      },
       async (
+        req: Request,
         accessToken: string,
         refreshToken: string,
-        profile: GoogleProfile,
+        params: GoogleCallbackParameters,
+        profile: Profile,
         done: VerifyCallback
       ) => {
         try {
-          const user: [User, boolean] = await userService.findOrCreate(
-            profile.emails![0].value,
-            profile.emails![0].verified,
-            profile.name!.familyName,
-            profile.name!.givenName,
-            "google",
+          let user: User | null = await userService.findUserByOAuthId(
             profile.id
           );
-          return done(null, user[0]);
+          if (!user) {
+            user = await userService.updateUser(
+              profile.emails![0].value,
+              profile.emails![0].verified,
+              profile.name!.familyName,
+              profile.name!.givenName,
+              "google",
+              profile.id
+            );
+          }
+          if (user) {
+            return done(null, user);
+          } else {
+            return done(null, false);
+          }
         } catch (err) {
-          return done(err, null);
+          return done(err, false);
         }
       }
     )
@@ -59,7 +66,10 @@ const setupGoogleAuth = (app: Express) => {
 
   app.get(
     "/_auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/" }),
+    passport.authenticate("google", {
+      failureRedirect: "/_auth/",
+      failureMessage: "Authentication failed, please try again.",
+    }),
     (req, res) => {
       res.redirect("/");
     }

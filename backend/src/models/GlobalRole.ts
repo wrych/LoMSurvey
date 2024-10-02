@@ -1,19 +1,22 @@
 import { DataTypes, Model } from "sequelize";
 import ORM from "../data/ORM.js";
 
-export interface RoleAttributes {
+export interface GlobalRoleAttributes {
   id?: number;
   title: string;
   description: string;
 }
 
-class Role extends Model<RoleAttributes> implements RoleAttributes {
+class GlobalRole
+  extends Model<GlobalRoleAttributes>
+  implements GlobalRoleAttributes
+{
   declare id: number;
   declare title: string;
   declare description: string;
 }
 
-Role.init(
+GlobalRole.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -32,8 +35,8 @@ Role.init(
   },
   {
     sequelize: ORM,
-    modelName: "Role",
+    modelName: "GlobalRole",
   }
 );
 
-export default Role;
+export default GlobalRole;

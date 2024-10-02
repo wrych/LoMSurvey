@@ -10,6 +10,10 @@ export class AuthService {
     return this.repository.getUser();
   };
 
+  getRole = (): Ref<AuthRole | null> => {
+    return this.repository.getRole();
+  };
+
   logout = async (): Promise<void> => {
     await authApi.logout();
     await this.repository.updateUser();

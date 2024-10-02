@@ -1,6 +1,7 @@
 import Assessment from "@/models/Assessment.js";
 import * as dimensionService from "@/services/dimension.js";
 import { setupLevels } from "./level.js";
+import { DimensionAttributes } from "@/models/Dimension.js";
 
 export const setupDimensions = async (
   assessment: Assessment
@@ -37,7 +38,7 @@ export const setupDimensions = async (
       min: d[3],
       max: d[4],
       assessmentId: assessment.id,
-    });
+    } as DimensionAttributes);
     await setupLevels(dimension);
   }
 };

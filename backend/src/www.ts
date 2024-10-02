@@ -6,12 +6,12 @@ import http from "http";
 
 debug("photoSharingBackend:server");
 
-const port = normalizePort(process.env.PORT || "3000");
+const port = Number(normalizePort(process.env.PORT || "3000"));
 app.set("port", port);
 
 const server = http.createServer(app);
 
-server.listen(port, "0.0.0.0");
+server.listen(port, "0.0.0.0", () => {});
 server.on("error", onError);
 server.on("listening", onListening);
 

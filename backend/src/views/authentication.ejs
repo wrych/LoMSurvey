@@ -20,22 +20,25 @@
 		</header>
 		<main>
 			<% if (user) { %>
-				<div class="fullwidth"> You are logged in as <%= user.email %>.
-				</div>
-				<div class="fullwidth">
-					<form action="/_auth/logout/" method="post">
-						<button type="submit">Log Out</button>
-					</form>
-				</div>
-				<% } else { %>
-					<a href="/_auth/google/">
-						<div class="fullwidth hoverable">
-							<i class="fa-brands fa-google"></i>
-							Log In Using Google
-						</div>
-					</a>
-					<% } %>
-		</main>
+			<div class="fullwidth"> You are logged in as <%= user.email %>.
+			</div>
+			<div class="fullwidth">
+				<form action="/_auth/logout/" method="post">
+					<button type="submit">Log Out</button>
+				</form>
+			</div>
+			<% } else { %>
+			<% if (hasMessages) { %>
+			<% messages.forEach(function(message) { %>
+			<div class="fullwidth message">
+				<span><%= message %></span>
+			</div <% }); %> <% } %> <a href="/_auth/google/">
+			<div class="fullwidth hoverable">
+				<i class="fa-brands fa-google"></i>
+				Log In Using Google
+			</div>
+			</a>
+			<% } %>
 	</div>
 </body>
 

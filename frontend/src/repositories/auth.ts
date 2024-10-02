@@ -8,11 +8,22 @@ import type { AuthUser } from "@/models/AuthUser";
 class AuthRepository {
   private store = useAuthStore();
 
+  updateRoles = async (): Promise<void> => {
+    this.store.user = await authApi.getRoles();
+  };
+
+  getRoles = (): Ref<AuthRoles | undefined> => {
+    if (this.store.roles === undefined) {
+      this.updateRoles();
+    }
+    return toRef(this.store, "roles");
+  };
+
   updateUser = async (): Promise<void> => {
     this.store.user = await authApi.getUser();
   };
 
-  getUser = (): Ref<AuthUser | null> => {
+  getUser = (): Ref<AuthUser | null | undefined> => {
     if (this.store.user === undefined) {
       this.updateUser();
     }

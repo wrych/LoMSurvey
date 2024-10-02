@@ -1,10 +1,6 @@
-import { create } from "@/services/role.js";
+import { create } from "@/services/assessmentRole.js";
 
-export const setupRoles = async (): Promise<void> => {
-  await create({
-    title: "admin",
-    description: "administrator",
-  });
+export const setupAssessmentRoles = async (): Promise<void> => {
   await create({
     title: "assessee",
     description: "person being assessed",
