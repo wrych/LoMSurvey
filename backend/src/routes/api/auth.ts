@@ -10,7 +10,7 @@ function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
 }
 
 router.get("/user", (req: Request, res: Response) => {
-  res.status(200).json({ value: req.user ? req.user : null });
+  res.status(200).json(req.user ? req.user : null);
 });
 
 router.post("/logout", function (req: Request, res: Response) {

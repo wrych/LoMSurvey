@@ -2,13 +2,17 @@
   <div class="levelselectorcontianer">
     <div class="titlecontainer">
       <h2 class="highlight">Dimension {{ props.dimension.name }}</h2>
+      <span
+        >Please select your mastery in the dimension
+        {{ props.dimension.name }} with the slider on the right hand side.</span
+      >
     </div>
     <div>
-      <LevelDescriptions v-model="value" :dimension="props.dimension" />
+      <LevelDescription v-model="value" :dimension="props.dimension" />
     </div>
     <div class="slidercontainer">
       <LevelSlider v-model="value" />
-      <NumberInput v-model="value" class="number" />
+      <NumberInput v-model="value" class="number" label="Mastery" />
     </div>
   </div>
 </template>
@@ -16,7 +20,7 @@
 <script setup lang="ts">
 import LevelSlider from "./LevelSlider.vue";
 import NumberInput from "./NumberInput.vue";
-import LevelDescriptions from "./LevelDescriptions.vue";
+import LevelDescription from "./LevelDescription.vue";
 import { type Dimension } from "@/dimensions";
 import type { PropType } from "vue";
 
@@ -32,12 +36,10 @@ const props = defineProps({
 <style scoped>
 .levelselectorcontianer {
   width: 100%;
-  max-width: 581px;
-  height: 100vh;
+  height: 100%;
   display: grid;
   grid-template-columns: 5fr 1fr;
   grid-template-rows: min-content 1fr;
-  grid-gap: 5px;
 }
 .descriptioncontainer {
   background-color: blueviolet;

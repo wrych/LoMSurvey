@@ -27,7 +27,7 @@ const setupGoogleAuth = (app: Express) => {
       {
         clientID: process.env.GOOGLE_CLIENT_ID!,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-        callbackURL: "/auth/google/callback",
+        callbackURL: "/_auth/google/callback",
       } as GoogleAuthConfig,
       async (
         accessToken: string,
@@ -53,15 +53,15 @@ const setupGoogleAuth = (app: Express) => {
   );
 
   app.get(
-    "/auth/google",
+    "/_auth/google",
     passport.authenticate("google", { scope: ["profile", "email"] })
   );
 
   app.get(
-    "/auth/google/callback",
+    "/_auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
     (req, res) => {
-      res.redirect("/_auth/");
+      res.redirect("/");
     }
   );
 };

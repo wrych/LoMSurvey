@@ -1,28 +1,31 @@
 <template>
   <main>
     <div class="main">
-      <h2 class="highlight">Level of Mastery Survey</h2>
-      <h3>Some Title</h3>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-      <h3>Some Other Title</h3>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
+      <h2 class="highlight">Level of Mastery Determination</h2>
+      <div v-if="user">
+        <div v-if="states">
+          <p v-for="state in states.states">{{ state.title }}</p>
+        </div>
+        <div v-else>
+          <p>Loading states...</p>
+        </div>
+      </div>
+      <div v-else>
+        <p>Please <a href="/_auth/">log in</a> to access the assessment.</p>
+      </div>
     </div>
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useAssessmentService } from "@/services/assessment";
+import { useAuthService } from "@/services/auth";
+
+const authService = useAuthService();
+const user = authService.getUser();
+const assessmentService = useAssessmentService();
+const states = assessmentService.getAllStates();
+</script>
 
 <style scoped>
 .main {

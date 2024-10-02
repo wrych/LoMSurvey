@@ -1,14 +1,16 @@
 <template>
-  <input
-    v-if="value"
-    type="number"
-    :value="parseFloat(value).toFixed(props.decimals)"
-    @change="updateValue"
-    min="0"
-    max="100"
-    class="value"
-    id="myValue"
-  />
+  <div class="number-input" v-if="value">
+    <label v-if="label" for="value">{{ props.label }}</label>
+    <input
+      type="number"
+      :value="parseFloat(value).toFixed(props.decimals)"
+      @change="updateValue"
+      min="0"
+      max="100"
+      class="value"
+      id="value"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -18,6 +20,10 @@ const props = defineProps({
   decimals: {
     type: Number,
     default: 1,
+  },
+  label: {
+    type: String,
+    default: "",
   },
 });
 const value: ModelRef<string | undefined> = defineModel();
@@ -33,6 +39,9 @@ const updateValue = (event: Event): void => {
 </script>
 
 <style scoped>
+.number-input {
+  display: grid;
+}
 input {
   background: none;
   border: solid 1px var(--color-border);
@@ -42,17 +51,17 @@ input:hover {
   border: solid 1px var(--color-border-hover);
 }
 input[type="number"] {
-  -moz-appearance: textfield; /* For Firefox */
-  appearance: textfield; /* For Chrome, Edge, and Safari */
+  -moz-appearance: textfield;
+  appearance: textfield;
   position: relative;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none; /* Hides the default spinner in WebKit browsers */
+  -webkit-appearance: none;
 }
 
 input[type="number"]::-moz-inner-spin-button {
-  display: none; /* Hides the default spinner in Firefox */
+  display: none;
 }
 </style>

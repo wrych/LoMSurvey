@@ -5,7 +5,7 @@ export const create = async (state: StateAttributes): Promise<State> => {
   return newState;
 };
 
-export const getInitialState = async (): Promise<State> => {
+export const findInitialState = async (): Promise<State> => {
   const initialState = await State.findOne({
     order: [["rank", "ASC"]],
   });
@@ -13,4 +13,11 @@ export const getInitialState = async (): Promise<State> => {
     throw new Error("No state found");
   }
   return initialState;
+};
+
+export const findAllStates = async (): Promise<State[]> => {
+  const states = await State.findAll({
+    order: [["rank", "ASC"]],
+  });
+  return states;
 };

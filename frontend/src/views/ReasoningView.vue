@@ -7,7 +7,7 @@
       <textarea
         class="reasoning"
         v-model="reasoning"
-        placeholder="Please provide examples of your track record in ${dimension.name}..."
+        :placeholder="`Please provide examples of your track record in ${dimension.name}...`"
       />
     </div>
   </main>
@@ -46,7 +46,6 @@ watch(() => route.params.id, updateRefs, { immediate: true });
 <style scoped>
 .main {
   width: 100%;
-  max-width: 581px;
   max-height: 100vh;
   position: relative;
 }

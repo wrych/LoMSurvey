@@ -1,0 +1,30 @@
+import { toRef } from "vue";
+import type { Ref } from "vue";
+
+import { useAuthStore } from "@/stores/auth";
+import * as authApi from "@/apis/auth";
+import type { AuthUser } from "@/models/AuthUser";
+
+class AuthRepository {
+  private store = useAuthStore();
+
+  updateUser = async (): Promise<void> => {
+    this.store.user = await authApi.getUser();
+  };
+
+  getUser = (): Ref<AuthUser | null> => {
+    if (this.store.user === undefined) {
+      this.updateUser();
+    }
+    return toRef(this.store, "user");
+  };
+}
+
+let authRepository: AuthRepository | null = null;
+
+export const useAuthRepository = (): AuthRepository => {
+  if (!authRepository) {
+    authRepository = new AuthRepository();
+  }
+  return authRepository;
+};

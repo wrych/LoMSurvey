@@ -43,7 +43,7 @@ const computedStyling = computed(() => {
   if (!cLvl) {
     throw Error("level must not be undefined");
   }
-  const lvlOffset = 1;
+  const lvlOffset = 0.5;
   let nTop = 0;
   let nBottom = levels.filter((l) => l.value < cLvl - 1).length;
   levels.forEach((lvl) => {

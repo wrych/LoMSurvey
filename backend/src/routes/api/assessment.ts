@@ -9,6 +9,7 @@ declare module "express-serve-static-core" {
 import * as dimensionService from "@/services/dimension.js";
 import * as assessmentService from "@/services/assessment.js";
 import * as levelService from "@/services/level.js";
+import * as stateService from "@/services/state.js";
 import { ensureAuthenticated } from "./auth.js";
 import Assessment from "@/models/Assessment.js";
 import Dimension from "@/models/Dimension.js";
@@ -47,6 +48,15 @@ router.get("/", ensureAuthenticated, async (req: Request, res: Response) => {
   const assessments = await assessmentService.findAll();
   res.status(200).json(assessments);
 });
+
+router.get(
+  "/states/",
+  ensureAuthenticated,
+  async (req: Request, res: Response) => {
+    const states = await stateService.findAllStates();
+    res.status(200).json(states);
+  }
+);
 
 router.get(
   "/:assessmentId/",

@@ -19,7 +19,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": { target: "http://example.com:3000", changeOrigin: true },
-      "/auth": { target: "http://example.com:3000", changeOrigin: true },
+      "/_auth": { target: "http://example.com:3000", changeOrigin: true },
     },
   },
 });
