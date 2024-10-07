@@ -8,7 +8,7 @@
             <p>{{ state.title }}</p>
             <ul v-if="assessments">
               <li v-for="assessment in getAssessments(state.id).assessments">
-                {{ assessment.title }}
+                {{ assessment.title }}<br />
               </li>
             </ul>
           </div>

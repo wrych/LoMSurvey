@@ -9,6 +9,34 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
+    {
+      path: "/assessment-session/:assessmentSessionId",
+      component: () => import("../views/AssessmentView.vue"),
+      children: [
+        {
+          path: "",
+          name: "Assessment Overview",
+          component: () =>
+            import("../components/AssessmentSessionOverview.vue"),
+        },
+        {
+          path: "dimension/:dimensionId",
+          component: () => import("../components/Dimension.vue"),
+          children: [
+            {
+              path: "level",
+              name: "Level",
+              component: () => import("../components/LevelSelector.vue"),
+            },
+            {
+              path: "reasoning",
+              name: "Reasoning",
+              component: () => import("../components/Reasoning.vue"),
+            },
+          ],
+        },
+      ],
+    },
     //   {
     //     path: "/weight",
     //     name: "Weight",

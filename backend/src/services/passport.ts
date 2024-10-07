@@ -2,7 +2,7 @@ import passport from "passport";
 import { Express } from "express";
 import User from "../models/User.js";
 
-const setupPassport = (app: Express) => {
+export const setupPassport = (app: Express) => {
   passport.serializeUser((user, done) => {
     const id = (user as User).id;
     done(null, id);
@@ -20,5 +20,3 @@ const setupPassport = (app: Express) => {
   app.use(passport.initialize());
   app.use(passport.session());
 };
-
-export { setupPassport };

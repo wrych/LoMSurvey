@@ -14,7 +14,7 @@ interface GlobalRoleHolderWithRole extends GlobalRoleHolder {
   GlobalRole: GlobalRole;
 }
 
-export const getGlobalRoleByUserId = async (userId: number) => {
+export const getGlobalRolesByUserId = async (userId: number) => {
   const roles = (await GlobalRoleHolder.findAll({
     where: { userId: userId },
     include: {

@@ -70,8 +70,12 @@ app.use((err: HttpError, req: Request, res: Response) => {
   res.render("error");
 });
 
-await syncDatabase();
-console.log(`running in environment '${app.get("env")}'...`);
-await runInitialSetup(app.get("env"));
+const startServer = async () => {
+  await syncDatabase();
+  console.log(`running in environment '${app.get("env")}'...`);
+  await runInitialSetup(app.get("env"));
+};
+
+startServer();
 
 export default app;

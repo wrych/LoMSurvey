@@ -3,6 +3,7 @@ import session from "express-session";
 
 import { Assessment } from "@/models/Assessment";
 import { Dimension } from "@/models/Dimension";
+import AssessmentSession from "@/models/AssessmentSession";
 
 declare module "express" {
   interface Response {
@@ -25,6 +26,7 @@ declare module "express" {
 declare module "express-serve-static-core" {
   interface Request {
     assessment?: Assessment;
+    assessmentSession?: AssessmentSession;
     dimension?: Dimension;
   }
 }

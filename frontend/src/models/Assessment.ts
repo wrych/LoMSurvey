@@ -19,10 +19,10 @@ export class Assessment {
 }
 
 export class Assessments {
-  assessments: Assessment[];
+  assessments: Record<number, Assessment>;
 
   constructor(assessments: Assessment[]) {
-    this.assessments = assessments;
+    this.assessments = Object.fromEntries(assessments.map((a) => [a.id, a]));
   }
 
   static fromJSON(json: Assessment[]): Assessments {

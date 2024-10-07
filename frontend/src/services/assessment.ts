@@ -7,11 +7,18 @@ import {
 import { ref, watch, type Ref } from "vue";
 import { useAuthService, type AuthService } from "./auth";
 import type { AuthUser } from "@/models/AuthUser";
+import type { AssessmentSession } from "@/models/AssessmentSession";
 
 class AssessmentService {
   private repository: AssessmentRepository;
   private authService: AuthService;
-  private user: Ref<AuthUser | null>;
+  private user: Ref<AuthUser | undefined | null>;
+
+  getAssessmentSessionById = (
+    id: number
+  ): Ref<AssessmentSession | undefined> => {
+    return this.repository.getAssessmentSessionById(id);
+  };
 
   private collectByState = (
     assessments: Ref<Assessments | undefined>,
@@ -19,12 +26,14 @@ class AssessmentService {
   ) => {
     if (assessments.value) {
       const assessmentDict: Record<number, Assessment[]> = {};
-      assessments.value.assessments.forEach((assessment: Assessment) => {
-        if (!assessmentDict[assessment.stateId]) {
-          assessmentDict[assessment.stateId] = [];
+      Object.values(assessments.value.assessments).forEach(
+        (assessment: Assessment) => {
+          if (!assessmentDict[assessment.stateId]) {
+            assessmentDict[assessment.stateId] = [];
+          }
+          assessmentDict[assessment.stateId].push(assessment);
         }
-        assessmentDict[assessment.stateId].push(assessment);
-      });
+      );
       assessmentsByStates.value = {};
       for (const [stateId, assessments] of Object.entries(assessmentDict)) {
         assessmentsByStates.value[parseInt(stateId)] = new Assessments(

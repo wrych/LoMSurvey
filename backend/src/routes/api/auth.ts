@@ -1,5 +1,5 @@
 import User from "@/models/User.js";
-import { getGlobalRoleByUserId } from "@/services/globalRoleHolder.js";
+import { getGlobalRolesByUserId } from "@/services/globalRoleHolder.js";
 import express, { Request, Response, NextFunction } from "express";
 
 const router = express.Router();
@@ -20,10 +20,10 @@ router.get("/user", (req: Request, res: Response) => {
 });
 
 router.get(
-  "/role",
+  "/roles",
   ensureAuthenticated,
   async (req: Request, res: Response) => {
-    res.status(200).json(await getGlobalRoleByUserId((req.user! as User).id));
+    res.status(200).json(await getGlobalRolesByUserId((req.user! as User).id));
   }
 );
 

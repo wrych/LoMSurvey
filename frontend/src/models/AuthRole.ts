@@ -1,33 +1,33 @@
 export class AuthRole {
   title: string;
   description: string;
-  roleId: number;
-  roleHolderId: number;
+  globalRoleId: number;
+  userId: number;
 
   constructor(
     title: string,
     description: string,
-    roleId: number,
+    globalRoleId: number,
     roleHolderId: number
   ) {
     this.title = title;
     this.description = description;
-    this.roleId = roleId;
-    this.roleHolderId = roleHolderId;
+    this.globalRoleId = globalRoleId;
+    this.userId = roleHolderId;
   }
 
   static fromJSON(json: {
     title: string;
     description: string;
-    roleId: number;
-    roleHolderId: number;
+    globalRoleId: number;
+    userId: number;
   }): AuthRole | null {
     return json
       ? new AuthRole(
           json.title,
           json.description,
-          json.roleId,
-          json.roleHolderId
+          json.globalRoleId,
+          json.userId
         )
       : null;
   }
@@ -40,9 +40,7 @@ export class AuthRoles {
     this.roles = roles;
   }
 
-  static fromJSON(json: AuthRole[]): AuthRoles | null {
-    return json
-      ? new AuthRoles(json.map((role) => AuthRole.fromJSON(role)!))
-      : null;
+  static fromJSON(json: AuthRole[]): AuthRoles {
+    return new AuthRoles(json.map((role) => AuthRole.fromJSON(role)!));
   }
 }

@@ -8,6 +8,8 @@ import { setupGlobalRoleHolder } from "./globalRoleHolder.js";
 import { setupAssessmentSessions } from "./assessmentSession.js";
 import { setupAssessmentRoleHolders } from "./assessmentRoleHolder.js";
 
+import * as assessmentService from "../services/assessment.js";
+
 export const setupAll = async (): Promise<void> => {
   const users = await setupUsers();
   const adminRole = await setupGlobalRoles();
@@ -19,7 +21,7 @@ export const setupAll = async (): Promise<void> => {
   const assessment = await setupAssessment();
   await setupDimensions(assessment);
   const session = await setupAssessmentSessions(assessment);
-  await setupAssessmentRoleHolders(session, [
+  await setupAssessmentRoleHolders([
     {
       roleHolders: [users["andy.moesch@dectris.com"]],
       role: assesseeRole,
@@ -37,7 +39,7 @@ export const setupAll = async (): Promise<void> => {
       role: purposeMemberRole,
     },
   ]);
-  await setupAssessmentRoleHolders(session, [
+  await setupAssessmentRoleHolders([
     {
       roleHolders: [users["ivo.pejakovic@dectris.com"]],
       role: assesseeRole,

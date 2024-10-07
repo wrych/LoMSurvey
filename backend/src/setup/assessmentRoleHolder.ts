@@ -4,23 +4,17 @@ import User from "@/models/User.js";
 import * as assessmentRoleHolderService from "@/services/assessmentRoleHolder.js";
 
 export interface RoleHolders {
-  roleHolders: User | User[];
+  roleHolders: User[];
   role: AssessmentRole;
 }
 
-export const setupAssessmentRoleHolders = (
-  session: AssessmentSession,
-  roles: RoleHolders[]
-): void => {
+export const setupAssessmentRoleHolders = (roles: RoleHolders[]): void => {
   roles.forEach(async (role: RoleHolders) => {
-    if (role.roleHolders instanceof Array) {
-      await role.roleHolders.forEach(async (user: User) => {
-        await assessmentRoleHolderService.create({
-          assessmentSessionId: session.id,
-          assessmentRoleId: role.role.id,
-          userId: user.id,
-        });
+    await role.roleHolders.forEach(async (user: User) => {
+      await assessmentRoleHolderService.create({
+        assessmentRoleId: role.role.id,
+        userId: user.id,
       });
-    }
+    });
   });
 };

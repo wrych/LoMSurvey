@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import ORM from "../data/ORM.js";
+import Assessment from "./Assessment.js";
 
 export interface AssessmentSessionAttributes {
   id?: number;
@@ -26,7 +27,7 @@ AssessmentSession.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Assessment",
+        model: Assessment,
         key: "id",
       },
     },
@@ -38,3 +39,6 @@ AssessmentSession.init(
 );
 
 export default AssessmentSession;
+
+AssessmentSession.belongsTo(Assessment, { foreignKey: "assessmentId" });
+Assessment.hasMany(AssessmentSession, { foreignKey: "assessmentId" });

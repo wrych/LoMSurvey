@@ -2,6 +2,7 @@ import express from "express";
 
 import authRouter from "./auth.js";
 import assessmentRouter from "./assessment.js";
+import assessmentSessionRouter from "./assessmentSession.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -10,5 +11,6 @@ router.get("/", (req, res) => {
 
 router.use("/auth", authRouter);
 router.use("/assessment", assessmentRouter);
+router.use("/assessment-session", assessmentSessionRouter);
 
 export default router;
