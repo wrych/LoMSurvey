@@ -11,7 +11,7 @@ const router = createRouter({
     },
     {
       path: "/assessment-session/:assessmentSessionId",
-      component: () => import("../views/AssessmentView.vue"),
+      component: () => import("../views/AssessmentSessionView.vue"),
       children: [
         {
           path: "",
@@ -23,6 +23,11 @@ const router = createRouter({
           path: "dimension/:dimensionId",
           component: () => import("../components/Dimension.vue"),
           children: [
+            {
+              path: "",
+              name: "Dimension Overview",
+              component: () => import("../components/DimensionOverview.vue"),
+            },
             {
               path: "level",
               name: "Level",

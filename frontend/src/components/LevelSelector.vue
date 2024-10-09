@@ -1,14 +1,12 @@
 <template>
-  <div class="levelselectorcontianer">
+  <div class="levelselectorcontainer" v-if="props.dimension">
     <div class="titlecontainer">
-      <h2 class="highlight">Dimension {{ props.dimension.name }}</h2>
-      <span
-        >Please select your mastery in the dimension
-        {{ props.dimension.name }} with the slider on the right hand side.</span
-      >
+      <h2 class="highlight">Dimension {{ props.dimension.title }}</h2>
+      <span>Please select your mastery in the dimension
+        {{ props.dimension.title }} with the slider on the right hand side.</span>
     </div>
-    <div>
-      <LevelDescription v-model="value" :dimension="props.dimension" />
+    <div class="descriptioncontainer">
+      <LevelDescription v-model="value" :dimension="props.dimension" :levels="props.levels" />
     </div>
     <div class="slidercontainer">
       <LevelSlider v-model="value" />
@@ -21,32 +19,39 @@
 import LevelSlider from "./LevelSlider.vue";
 import NumberInput from "./NumberInput.vue";
 import LevelDescription from "./LevelDescription.vue";
-import { type Dimension } from "@/dimensions";
-import type { PropType } from "vue";
+import { computed } from "vue";
+import { Assessment } from "@/models/Assessment";
+import { AssessmentSession } from "@/models/AssessmentSession";
+import { Dimension } from "@/models/Dimension";
+import { useRoute } from "vue-router";
+import type { Levels } from "@/models/Level";
+
+const route = useRoute();
 
 const value = defineModel();
-const props = defineProps({
-  dimension: {
-    type: Object as PropType<Dimension>,
-    required: true,
-  },
-});
+const props = defineProps<{
+  assessment: Assessment | undefined,
+  assessmentSession: AssessmentSession | undefined,
+  dimension: Dimension | undefined
+  levels: Levels | undefined
+}>();
 </script>
 
 <style scoped>
-.levelselectorcontianer {
+.levelselectorcontainer {
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: 5fr 1fr;
   grid-template-rows: min-content 1fr;
 }
+
 .descriptioncontainer {
-  background-color: blueviolet;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
+
 .slidercontainer {
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -54,11 +59,13 @@ const props = defineProps({
   width: 100%;
   height: 100%;
 }
+
 .titlecontainer {
   grid-column-start: 1;
   grid-column-end: 3;
   height: min-content;
 }
+
 .number {
   height: 30px;
 }

@@ -61,7 +61,7 @@ router.get(
 );
 
 router.get(
-  "/:assessmentId/dimension/",
+  "/:assessmentId/dimensions/",
   ensureAuthenticated,
   fetchAssessment,
   async (req: Request, res: Response) => {
@@ -73,9 +73,8 @@ router.get(
 );
 
 router.get(
-  "/:assessmentId/dimension/:dimensionId/",
+  "/dimension/:dimensionId/",
   ensureAuthenticated,
-  fetchAssessment,
   fetchDimension,
   async (req: Request, res: Response) => {
     res.status(200).json(req.dimension!);
@@ -83,9 +82,8 @@ router.get(
 );
 
 router.get(
-  "/:assessmentId/dimension/:dimensionId/level/",
+  "/dimension/:dimensionId/levels/",
   ensureAuthenticated,
-  fetchAssessment,
   fetchDimension,
   async (req: Request, res: Response) => {
     res.status(200).json(await levelService.findByDimension(req.dimension!));
@@ -93,10 +91,8 @@ router.get(
 );
 
 router.get(
-  "/:assessmentId/dimension/:dimensionId/level/:levelId/",
+  "/level/:levelId/",
   ensureAuthenticated,
-  fetchAssessment,
-  fetchDimension,
   async (req: Request, res: Response) => {
     res
       .status(200)

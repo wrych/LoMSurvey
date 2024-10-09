@@ -28,6 +28,8 @@ import Navigation from "./components/Navigation.vue";
 
 .content {
   display: grid;
+  height: 100%;
+  width: 100%;
 }
 
 .navigation {
@@ -60,9 +62,11 @@ nav a:first-of-type {
   .content {
     grid-template-columns: 200px 1fr;
   }
+
   .navigation {
     display: block;
   }
+
   nav {
     text-align: left;
   }

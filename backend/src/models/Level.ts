@@ -4,16 +4,12 @@ import Dimension from "./Dimension.js";
 
 export interface LevelAttributes {
   id?: number;
-  title: string;
-  description: string;
   level: number;
   dimensionId: number;
 }
 
 class Level extends Model<LevelAttributes> implements LevelAttributes {
   declare id: number;
-  declare title: string;
-  declare description: string;
   declare level: number;
   declare dimensionId: number;
 }
@@ -25,14 +21,6 @@ Level.init(
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
-    },
-    title: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: false,
     },
     level: {
       type: DataTypes.FLOAT,

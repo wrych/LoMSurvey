@@ -8,11 +8,21 @@ import { ref, watch, type Ref } from "vue";
 import { useAuthService, type AuthService } from "./auth";
 import type { AuthUser } from "@/models/AuthUser";
 import type { AssessmentSession } from "@/models/AssessmentSession";
+import type { Dimensions } from "@/models/Dimension";
+import type { Levels } from "@/models/Level";
 
 class AssessmentService {
   private repository: AssessmentRepository;
   private authService: AuthService;
   private user: Ref<AuthUser | undefined | null>;
+
+  getDimensionsByAssessmentId = (id: number): Ref<Dimensions | undefined> => {
+    return this.repository.getDimensionsByAssessmentId(id);
+  };
+
+  getLevelsByDimensionId = (id: number): Ref<Levels | undefined> => {
+    return this.repository.getLevelsByDimensionId(id);
+  };
 
   getAssessmentSessionById = (
     id: number
@@ -41,6 +51,10 @@ class AssessmentService {
         );
       }
     }
+  };
+
+  getAssessmentById = (id: number): Ref<Assessment | undefined> => {
+    return this.repository.getAssessmentById(id);
   };
 
   getAssessmentsByStates = (): Ref<Record<number, Assessments> | undefined> => {
