@@ -40,6 +40,11 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: "summary",
+          name: "Summary",
+          component: () => import("../components/Summary.vue"),
+        },
       ],
     },
     //   {

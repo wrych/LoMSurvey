@@ -15,7 +15,7 @@
         </form>
       </div>
     </div>
-    <div class="menu">Menu</div>
+    <div class="menu"></div>
   </div>
 </template>
 

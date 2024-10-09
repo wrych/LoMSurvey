@@ -4,7 +4,7 @@
       <InfoBar />
     </header>
     <div class="content">
-      <Navigation />
+      <!-- <Navigation /> -->
       <RouterView />
     </div>
   </div>
@@ -20,6 +20,7 @@ import Navigation from "./components/Navigation.vue";
 .wrapper {
   height: 100vh;
   max-width: 1280px;
+  padding: 0 20px;
   width: 100%;
   margin: 0 auto;
   display: grid;
@@ -60,7 +61,7 @@ nav a:first-of-type {
 
 @media (min-width: 1024px) {
   .content {
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 1fr;
   }
 
   .navigation {
