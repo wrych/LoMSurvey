@@ -1,11 +1,23 @@
 import Assessment from "@/models/Assessment.js";
 import AssessmentSession from "@/models/AssessmentSession.js";
-import { create } from "@/services/assessmentSession.js";
+import Dimension from "@/models/Dimension";
+import {
+  create,
+  createLevelandWeightValue,
+} from "@/services/assessmentSession.js";
 
 export const setupAssessmentSessions = async (
-  assessment: Assessment
+  assessment: Assessment,
+  dimensions: Dimension[]
 ): Promise<AssessmentSession> => {
-  return await create({
+  const session = await create({
     assessmentId: assessment.id,
   });
+  dimensions.forEach(async (dimension: Dimension) => {
+    await createLevelandWeightValue({
+      assessmentSessionId: session.id,
+      dimensionId: dimension.id,
+    });
+  });
+  return session;
 };

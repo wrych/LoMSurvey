@@ -1,11 +1,12 @@
 import Assessment from "@/models/Assessment.js";
 import * as dimensionService from "@/services/dimension.js";
 import { setupLevels } from "./level.js";
-import { DimensionAttributes } from "@/models/Dimension.js";
+import Dimension, { DimensionAttributes } from "@/models/Dimension.js";
 
 export const setupDimensions = async (
   assessment: Assessment
-): Promise<void> => {
+): Promise<Dimension[]> => {
+  const dimensions: Dimension[] = [];
   for (let d of [
     ["Ownership", "Ownership description", "Ownership impact", 4, 12],
     [
@@ -39,6 +40,8 @@ export const setupDimensions = async (
       max: d[4],
       assessmentId: assessment.id,
     } as DimensionAttributes);
+    dimensions.push(dimension);
     await setupLevels(dimension);
   }
+  return dimensions;
 };

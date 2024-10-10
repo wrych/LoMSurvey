@@ -19,8 +19,8 @@ export const setupAll = async (): Promise<void> => {
   const [assesseeRole, peerRole, delegatorRole, purposeMemberRole] =
     await setupAssessmentRoles();
   const assessment = await setupAssessment();
-  await setupDimensions(assessment);
-  const session = await setupAssessmentSessions(assessment);
+  const dimensions = await setupDimensions(assessment);
+  const session = await setupAssessmentSessions(assessment, dimensions);
   await setupAssessmentRoleHolders([
     {
       roleHolders: [users["andy.moesch@dectris.com"]],

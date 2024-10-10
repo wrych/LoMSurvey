@@ -8,16 +8,14 @@
 </template>
 
 <script setup lang="ts">
-import type { Dimension } from '@/models/Dimension';
-import type { Assessment } from '@/models/Assessment';
-import type { AssessmentSession } from '@/models/AssessmentSession';
 import { useRoute } from 'vue-router';
+import type { AssessmentSessionService } from '@/services/assessmentSession';
+import type { Dimension } from '@/models/Dimension';
 
 const route = useRoute();
 
 const props = defineProps<{
-  assessment: Assessment | undefined,
-  assessmentSession: AssessmentSession | undefined,
-  dimension: Dimension | undefined
+  service: AssessmentSessionService;
+  dimension: Dimension | undefined;
 }>();
 </script>

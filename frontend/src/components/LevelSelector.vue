@@ -1,18 +1,12 @@
 <template>
   <div class="levelselectorcontainer" v-if="props.dimension">
     <div class="info-container">
-      <span
-        >Please select your mastery in the dimension
+      <span>Please select your mastery in the dimension
         {{ props.dimension.title }} with the slider on the right hand
-        side.</span
-      >
+        side.</span>
     </div>
     <div class="descriptioncontainer">
-      <LevelDescription
-        v-model="value"
-        :dimension="props.dimension"
-        :levels="props.levels"
-      />
+      <LevelDescription v-model="value" :dimension="props.dimension" :levels="props.levels" />
     </div>
     <div class="slidercontainer">
       <LevelSlider v-model="value" />
@@ -25,18 +19,12 @@
 import LevelSlider from "./LevelSlider.vue";
 import NumberInput from "./NumberInput.vue";
 import LevelDescription from "./LevelDescription.vue";
-import { Assessment } from "@/models/Assessment";
-import { AssessmentSession } from "@/models/AssessmentSession";
 import { Dimension } from "@/models/Dimension";
-import { useRoute } from "vue-router";
 import type { Levels } from "@/models/Level";
+import type { AssessmentSessionService } from "@/services/assessmentSession";
 
-const route = useRoute();
-
-const value = defineModel();
 const props = defineProps<{
-  assessment: Assessment | undefined;
-  assessmentSession: AssessmentSession | undefined;
+  service: AssessmentSessionService;
   dimension: Dimension | undefined;
   levels: Levels | undefined;
 }>();

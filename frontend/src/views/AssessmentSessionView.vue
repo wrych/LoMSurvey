@@ -2,17 +2,14 @@
   <main>
     <div class="assessment-session">
       <div>
-        <h1 v-if="assessment">{{ assessment.title }}</h1>
+        <h1 v-if="service.assessment.value">{{ service.assessment.value.title }}</h1>
         <nav>
           <div class="nav-top">
             <router-link :to="`${basePath}/`">
               <div class="link">Overview</div>
             </router-link>
-            <router-link
-              v-if="dimensions"
-              v-for="dimension in dimensions.dimensions"
-              :to="`${basePath}/dimension/${dimension.id}`"
-            >
+            <router-link v-if="service.dimensions.value" v-for="dimension in service.dimensions.value.dimensions"
+              :to="`${basePath}/dimension/${dimension.id}`">
               <div class="link">
                 {{ dimension.title }}
               </div>
@@ -26,30 +23,22 @@
           </div>
         </nav>
       </div>
-      <router-view
-        :assessmentSession="assessmentSession"
-        :assessment="assessment"
-        :dimensions="dimensions"
-      />
+      <router-view :service="service" />
       <div>
         <nav>
-          <div v-if="navEntries && pageIndex >= 0" class="nav-bottom">
+          <div v-if="service.navEntries.value && pageIndex >= 0" class="nav-bottom">
             <div class="left">
-              <router-link
-                v-if="pageIndex > 0"
-                :to="navEntries[pageIndex - 1].path"
-              >
-                <div class="link">< prev</div>
+              <router-link v-if="pageIndex > 0" :to="service.navEntries.value[pageIndex - 1].path">
+                <div class="link">
+                  < prev</div>
               </router-link>
             </div>
             <div class="progress-info center">
-              {{ pageIndex + 1 }}/{{ navEntries.length }}
+              {{ pageIndex + 1 }}/{{ service.navEntries.value.length }}
             </div>
             <div class="right">
-              <router-link
-                v-if="pageIndex + 1 < navEntries.length"
-                :to="navEntries[pageIndex + 1]?.path"
-              >
+              <router-link v-if="pageIndex + 1 < service.navEntries.value.length"
+                :to="service.navEntries.value[pageIndex + 1]?.path">
                 <div class="link next">next ></div>
               </router-link>
             </div>
@@ -62,81 +51,29 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-
-import { useAssessmentService } from "@/services/assessment";
-import { watch, ref } from "vue";
-import { Assessment } from "@/models/Assessment";
-import type { Dimensions } from "@/models/Dimension";
 import { computed } from "@vue/reactivity";
+import { AssessmentSessionService } from "@/services/assessmentSession";
 
 const route = useRoute();
-const basePath = `/assessment-session/${route.params.assessmentSessionId}`;
-
-const assessmentService = useAssessmentService();
-const assessmentSessionId = parseInt(
+const basePath = computed(() => `/assessment-session/${route.params.assessmentSessionId}`);
+const assessmentSessionId = computed(() => parseInt(
   Array.isArray(route.params.assessmentSessionId)
     ? route.params.assessmentSessionId[0]
     : route.params.assessmentSessionId
-);
+));
 
-const assessmentSession =
-  assessmentService.getAssessmentSessionById(assessmentSessionId);
-const assessment = ref<Assessment | undefined>(undefined);
-const dimensions = ref<Dimensions | undefined>(undefined);
-const navEntries = ref<{ title: string; path: string }[]>([]);
+const service = new AssessmentSessionService(assessmentSessionId, basePath);
 
 const pageIndex = computed(() =>
-  navEntries.value.findIndex((entry) => entry.path === route.fullPath)
+  service.navEntries.value.findIndex((entry) => entry.path === route.fullPath)
 );
 
-watch(assessmentSession, () => {
-  if (assessmentSession.value) {
-    const a = assessmentService.getAssessmentById(
-      assessmentSession.value.assessmentId
-    );
-    watch(a, () => {
-      assessment.value = a.value;
-    });
+import { watch } from "vue";
+watch(() => service.boundLevels, () => {
+  if (service.boundLevels) {
+    console.log("boundLevels", service.boundLevels);
   }
-});
-
-watch(assessment, () => {
-  if (assessment.value) {
-    const ds = assessmentService.getDimensionsByAssessmentId(
-      assessment.value.id
-    );
-    watch(ds, () => {
-      dimensions.value = ds.value;
-    });
-  }
-});
-
-watch(dimensions, () => {
-  if (dimensions.value) {
-    navEntries.value.push({
-      title: "Overview",
-      path: `${basePath}/`,
-    });
-    Object.values(dimensions.value.dimensions).forEach((d) => {
-      navEntries.value.push({
-        title: `${d.title} Overview`,
-        path: `${basePath}/dimension/${d.id}`,
-      });
-      navEntries.value.push({
-        title: `${d.title} Level`,
-        path: `${basePath}/dimension/${d.id}/level`,
-      });
-      navEntries.value.push({
-        title: `${d.title} Reasoning`,
-        path: `${basePath}/dimension/${d.id}/reasoning`,
-      });
-    });
-    navEntries.value.push({
-      title: "Summary",
-      path: `${basePath}/summary`,
-    });
-  }
-});
+}, { immediate: true });
 </script>
 
 <style scoped>

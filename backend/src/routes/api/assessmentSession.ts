@@ -2,6 +2,8 @@ import express, { NextFunction, Request, Response } from "express";
 import * as dimensionService from "@/services/dimension.js";
 import * as assessmentSessionService from "@/services/assessmentSession.js";
 import { ensureAuthenticated } from "./auth.js";
+import { Value } from "@/models/Value.js";
+import { Weight } from "@/models/Weight.js";
 
 const fetchAssessmentSession = async (
   req: Request,
@@ -54,8 +56,14 @@ router.get(
   fetchAssessmentSession,
   fetchDimension,
   async (req: Request, res: Response) => {
-    // res.status(200).json();
-    throw new Error("Not implemented");
+    res.status(200).json(
+      await Value.findOne({
+        where: {
+          assessmentSessionId: req.assessmentSession!.id,
+          dimensionId: req.dimension!.id,
+        },
+      })
+    );
   }
 );
 
@@ -65,8 +73,12 @@ router.get(
   fetchAssessmentSession,
   fetchDimension,
   async (req: Request, res: Response) => {
-    // res.status(200).json();
-    throw new Error("Not implemented");
+    await Weight.findOne({
+      where: {
+        assessmentSessionId: req.assessmentSession!.id,
+        dimensionId: req.dimension!.id,
+      },
+    });
   }
 );
 

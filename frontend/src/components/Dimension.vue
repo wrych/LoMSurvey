@@ -16,56 +16,28 @@
         </div>
       </nav>
     </div>
-    <router-view
-      :dimension="dimension"
-      :assessmentSession="assessmentSession"
-      :assessment="assessment"
-      :levels="levels"
-    />
+    <router-view :service="service" :dimension="dimension" :levels="levels" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Assessment } from "@/models/Assessment";
-import type { AssessmentSession } from "@/models/AssessmentSession";
-import type { Dimensions } from "@/models/Dimension";
-import { computed, ref, watch } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
-
-import { useAssessmentService } from "@/services/assessment";
-import type { Levels } from "@/models/Level";
+import type { AssessmentSessionService } from "@/services/assessmentSession";
 
 const route = useRoute();
 const basePath = computed(
   () =>
     `/assessment-session/${route.params.assessmentSessionId}/dimension/${route.params.dimensionId}`
 );
-
-const assessmentService = useAssessmentService();
-
 const props = defineProps<{
-  assessment: Assessment | undefined;
-  assessmentSession: AssessmentSession | undefined;
-  dimensions: Dimensions | undefined;
+  service: AssessmentSessionService;
 }>();
 const dimension = computed(
   () =>
-    props.dimensions?.dimensions[parseInt(route.params.dimensionId as string)]
+    props.service.dimensions.value?.dimensions[parseInt(route.params.dimensionId as string)]
 );
-const levels = ref<Levels | undefined>(undefined);
-
-watch(
-  () => dimension.value,
-  () => {
-    if (dimension.value) {
-      const lvl = assessmentService.getLevelsByDimensionId(dimension.value.id);
-      watch(lvl, () => {
-        levels.value = lvl.value;
-      });
-    }
-  },
-  { immediate: true }
-);
+const levels = props.service.getLevels(dimension);
 </script>
 
 <style scoped>
@@ -80,6 +52,7 @@ watch(
   display: grid;
   grid-template-rows: auto 1fr;
 }
+
 .link {
   width: 100%;
   height: 100%;
