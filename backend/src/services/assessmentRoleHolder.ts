@@ -1,7 +1,7 @@
-import AssessmentRole from "@/models/AssessmentRole.js";
+import AssessmentRole from "../models/AssessmentRole.js";
 import AssessmentRoleHolder, {
   AssessmentRoleHolderAttributes,
-} from "@/models/AssessmentRoleHolder.js";
+} from "../models/AssessmentRoleHolder.js";
 
 export const create = async (
   assessmentRoleHolder: AssessmentRoleHolderAttributes

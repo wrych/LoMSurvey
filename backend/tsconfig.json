@@ -12,11 +12,6 @@
     "moduleResolution": "node10",
     "outDir": "dist/",
     "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
   },
   "include": [
     "src/**/*.ts"

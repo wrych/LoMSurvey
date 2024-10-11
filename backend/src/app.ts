@@ -8,12 +8,14 @@ import session from "express-session";
 import pluralize from "pluralize";
 import connectSessionSequelize from "connect-session-sequelize";
 
-import setupGoogleAuth from "@/services/googleAuth.js";
-import apiRouter from "@/routes/api/api.js";
-import authRouter from "@/routes/auth.js";
-import ORM from "@/data/ORM.js";
-import syncDatabase, { runInitialSetup } from "@/initialSetup.js";
-import { setupPassport } from "@/services/passport.js";
+import setupGoogleAuth from "./services/googleAuth.js";
+import apiRouter from "./routes/api/api.js";
+import authRouter from "./routes/auth.js";
+import ORM from "./data/ORM.js";
+import syncDatabase, { runInitialSetup } from "./initialSetup.js";
+import { setupPassport } from "./services/passport.js";
+import path from "path";
+import { rootPath } from "./meta.js";
 
 dotenv.config();
 
@@ -29,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static("./public"));
+app.use(express.static("./app"));
 
 const SequelizeStore = connectSessionSequelize(session.Store);
 app.use(
@@ -57,6 +60,11 @@ setupGoogleAuth(app);
 
 app.use("/api", apiRouter);
 app.use("/_auth", authRouter);
+
+const appEntryPoint = path.join(rootPath, "/app/", "index.html");
+app.get("*", (req, res) => {
+  res.sendFile(appEntryPoint);
+});
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404));

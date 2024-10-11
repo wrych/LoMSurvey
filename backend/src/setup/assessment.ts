@@ -1,6 +1,6 @@
-import Assessment from "@/models/Assessment.js";
-import { create } from "@/services/assessment.js";
-import * as stateService from "@/services/state.js";
+import Assessment from "../models/Assessment.js";
+import { create } from "../services/assessment.js";
+import * as stateService from "../services/state.js";
 
 export const setupAssessment = async (): Promise<Assessment> => {
   const initialState = await stateService.findInitialState();

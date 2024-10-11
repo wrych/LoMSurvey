@@ -1,12 +1,10 @@
 <template>
-  <div class="number-input" v-if="value">
+  <div class="number-input">
     <label v-if="label" for="value">{{ props.label }}</label>
     <input
       type="number"
-      :value="parseFloat(value).toFixed(props.decimals)"
+      :value="currentValue"
       @change="updateValue"
-      min="0"
-      max="100"
       class="value"
       id="value"
     />
@@ -14,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ModelRef } from "vue";
+import { computed, type ModelRef } from "vue";
 
 const props = defineProps({
   decimals: {
@@ -25,8 +23,23 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  default: {
+    type: Number,
+    default: 8.0,
+  },
+  min: {
+    type: Number,
+    default: null,
+  },
+  max: {
+    type: Number,
+    default: null,
+  },
 });
-const value: ModelRef<string | undefined> = defineModel();
+const value: ModelRef<number | null | undefined> = defineModel();
+const currentValue = computed(() =>
+  (value.value || props.default).toFixed(props.decimals)
+);
 
 const updateValue = (event: Event): void => {
   if (!event.target) {
@@ -34,7 +47,17 @@ const updateValue = (event: Event): void => {
     return;
   }
   const input = event.target as HTMLInputElement;
-  value.value = input.value;
+  const v = parseFloat(input.value);
+  if (
+    isNaN(v) ||
+    (props.min && v < props.min) ||
+    (props.max && v > props.max)
+  ) {
+    console.warn(`Unexpected value provided or outside range: ${input.value}`);
+    input.value = currentValue.value;
+    return;
+  }
+  value.value = v;
 };
 </script>
 

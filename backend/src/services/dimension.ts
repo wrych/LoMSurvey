@@ -1,5 +1,5 @@
-import Assessment from "@/models/Assessment.js";
-import Dimension, { DimensionAttributes } from "@/models/Dimension.js";
+import Assessment from "../models/Assessment.js";
+import Dimension, { DimensionAttributes } from "../models/Dimension.js";
 
 export const findAll = async (): Promise<Dimension[]> => {
   const dimensions: Dimension[] = await Dimension.findAll();

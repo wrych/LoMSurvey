@@ -1,8 +1,16 @@
 <template>
   <div class="leveldescriptioncontainer">
-    <div v-if="orderedLevels" v-for="lvl in orderedLevels" :style="computedStyling[lvl.level]" class="leveldescription">
+    <div
+      v-if="orderedLevels"
+      v-for="lvl in orderedLevels"
+      :style="computedStyling[lvl.level]"
+      class="leveldescription"
+    >
       <h3 @click="selectLevel(lvl.level)">Level {{ lvl.level }}</h3>
-      <span>Employees in {{ props.dimension?.title }} level {{ lvl.level }}...</span>
+      <span
+        >Employees in {{ props.dimension?.title }} level
+        {{ lvl.level }}...</span
+      >
       <ul>
         <li v-for="c in lvl.capabilities">{{ c }}</li>
       </ul>
@@ -17,27 +25,32 @@
 <script setup lang="ts">
 import type { Dimension } from "@/models/Dimension";
 import { Levels } from "@/models/Level";
-import { computed, watch, type ComputedRef, type ModelRef } from "vue";
+import type { AssessmentSessionService } from "@/services/assessmentSession";
+import { computed, type ComputedRef } from "vue";
 
 const props = defineProps<{
-  dimension: Dimension | undefined,
-  levels: Levels | undefined
+  service: AssessmentSessionService;
+  dimension: Dimension | undefined;
+  levels: Levels | undefined;
 }>();
-const level: ModelRef<number | undefined> = defineModel();
-const selectLevel = (selectedLevel: number) => {
-  level.value = selectedLevel;
-};
-level.value = 8
 
-const orderedLevels = computed(() => props.levels ? Object.values(props.levels.levels).sort((a, b) => a.level - b.level) : undefined);
+const orderedLevels = computed(() =>
+  props.levels
+    ? Object.values(props.levels.levels).sort((a, b) => a.level - b.level)
+    : undefined
+);
+
+const selectLevel = (level: number) => {
+  props.service.levelValues[props.dimension!.id].value.value = level;
+};
 
 const computedStyling: ComputedRef<Record<string, string>> = computed(() => {
   const vs: Record<string, string> = {};
   const levels = props.levels ? Object.values(props.levels.levels) : undefined;
-  const cLvl = level.value;
-  if (!levels || !cLvl) {
-    return vs
+  if (!levels || !props.dimension) {
+    return vs;
   }
+  const cLvl = props.service.levelValues[props.dimension.id].value.value || 8.0;
   const lvlOffset = 0.5;
   let nTop = 0;
   let nBottom = levels.filter((l) => l.level < cLvl - 1).length;
@@ -58,8 +71,6 @@ const computedStyling: ComputedRef<Record<string, string>> = computed(() => {
   });
   return vs;
 });
-
-watch(level, () => { });
 </script>
 
 <style scoped>

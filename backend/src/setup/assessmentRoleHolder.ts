@@ -1,7 +1,6 @@
-import AssessmentRole from "@/models/AssessmentRole.js";
-import AssessmentSession from "@/models/AssessmentSession.js";
-import User from "@/models/User.js";
-import * as assessmentRoleHolderService from "@/services/assessmentRoleHolder.js";
+import AssessmentRole from "../models/AssessmentRole.js";
+import User from "../models/User.js";
+import * as assessmentRoleHolderService from "../services/assessmentRoleHolder.js";
 
 export interface RoleHolders {
   roleHolders: User[];

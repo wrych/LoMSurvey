@@ -1,9 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
-import * as dimensionService from "@/services/dimension.js";
-import * as assessmentSessionService from "@/services/assessmentSession.js";
+import * as dimensionService from "../../services/dimension.js";
+import * as assessmentSessionService from "../../services/assessmentSession.js";
 import { ensureAuthenticated } from "./auth.js";
-import { Value } from "@/models/Value.js";
-import { Weight } from "@/models/Weight.js";
+import { Value } from "../../models/Value.js";
+import { Weight } from "../../models/Weight.js";
+import { ValueReasoning } from "../../models/ValueReasoning.js";
+import { WeightReasoning } from "../../models/WeightReasoning.js";
 
 const fetchAssessmentSession = async (
   req: Request,
@@ -51,6 +53,36 @@ router.get(
 );
 
 router.get(
+  "/:assessmentSessionId/weight-reasoning",
+  ensureAuthenticated,
+  fetchAssessmentSession,
+  async (req: Request, res: Response) => {
+    res.status(200).json(
+      await WeightReasoning.findOne({
+        where: { assessmentSessionId: req.assessmentSession!.id },
+      })
+    );
+  }
+);
+
+router.post(
+  "/:assessmentSessionId/weight-reasoning",
+  ensureAuthenticated,
+  fetchAssessmentSession,
+  async (req: Request, res: Response) => {
+    const wr = await WeightReasoning.findOne({
+      where: { assessmentSessionId: req.assessmentSession!.id },
+    });
+    if (!wr) {
+      return res.status(404).json({ message: "weight reasoning not found" });
+    }
+    wr.text = req.body.value;
+    wr.save();
+    res.status(200).json(wr);
+  }
+);
+
+router.get(
   "/:assessmentSessionId/dimension/:dimensionId/level",
   ensureAuthenticated,
   fetchAssessmentSession,
@@ -67,18 +99,100 @@ router.get(
   }
 );
 
+router.post(
+  "/:assessmentSessionId/dimension/:dimensionId/level",
+  ensureAuthenticated,
+  fetchAssessmentSession,
+  fetchDimension,
+  async (req: Request, res: Response) => {
+    const level = await Value.findOne({
+      where: {
+        assessmentSessionId: req.assessmentSession!.id,
+        dimensionId: req.dimension!.id,
+      },
+    });
+    if (!level) {
+      return res.status(404).json({ message: "level not found" });
+    }
+    level.value = req.body.value;
+    level.save();
+    res.status(200).json(level);
+  }
+);
+
 router.get(
   "/:assessmentSessionId/dimension/:dimensionId/weight",
   ensureAuthenticated,
   fetchAssessmentSession,
   fetchDimension,
   async (req: Request, res: Response) => {
-    await Weight.findOne({
+    res.status(200).json(
+      await Weight.findOne({
+        where: {
+          assessmentSessionId: req.assessmentSession!.id,
+          dimensionId: req.dimension!.id,
+        },
+      })
+    );
+  }
+);
+
+router.post(
+  "/:assessmentSessionId/dimension/:dimensionId/weight",
+  ensureAuthenticated,
+  fetchAssessmentSession,
+  fetchDimension,
+  async (req: Request, res: Response) => {
+    const weight = await Weight.findOne({
       where: {
         assessmentSessionId: req.assessmentSession!.id,
         dimensionId: req.dimension!.id,
       },
     });
+    if (!weight) {
+      return res.status(404).json({ message: "weight not found" });
+    }
+    weight.value = req.body.value;
+    weight.save();
+    res.status(200).json(weight);
+  }
+);
+
+router.get(
+  "/:assessmentSessionId/dimension/:dimensionId/reasoning",
+  ensureAuthenticated,
+  fetchAssessmentSession,
+  fetchDimension,
+  async (req: Request, res: Response) => {
+    res.status(200).json(
+      await ValueReasoning.findOne({
+        where: {
+          assessmentSessionId: req.assessmentSession!.id,
+          dimensionId: req.dimension!.id,
+        },
+      })
+    );
+  }
+);
+
+router.post(
+  "/:assessmentSessionId/dimension/:dimensionId/reasoning",
+  ensureAuthenticated,
+  fetchAssessmentSession,
+  fetchDimension,
+  async (req: Request, res: Response) => {
+    const reasoning = await ValueReasoning.findOne({
+      where: {
+        assessmentSessionId: req.assessmentSession!.id,
+        dimensionId: req.dimension!.id,
+      },
+    });
+    if (!reasoning) {
+      return res.status(404).json({ message: "reaonsing not found" });
+    }
+    reasoning.text = req.body.value;
+    reasoning.save();
+    res.status(200).json(reasoning);
   }
 );
 

@@ -2,14 +2,19 @@
   <main>
     <div class="assessment-session">
       <div>
-        <h1 v-if="service.assessment.value">{{ service.assessment.value.title }}</h1>
+        <h1 v-if="service.assessment.value">
+          {{ service.assessment.value.title }}
+        </h1>
         <nav>
           <div class="nav-top">
             <router-link :to="`${basePath}/`">
               <div class="link">Overview</div>
             </router-link>
-            <router-link v-if="service.dimensions.value" v-for="dimension in service.dimensions.value.dimensions"
-              :to="`${basePath}/dimension/${dimension.id}`">
+            <router-link
+              v-if="service.dimensions.value"
+              v-for="dimension in service.dimensions.value.dimensions"
+              :to="`${basePath}/dimension/${dimension.id}`"
+            >
               <div class="link">
                 {{ dimension.title }}
               </div>
@@ -26,19 +31,26 @@
       <router-view :service="service" />
       <div>
         <nav>
-          <div v-if="service.navEntries.value && pageIndex >= 0" class="nav-bottom">
+          <div
+            v-if="service.navEntries.value && pageIndex >= 0"
+            class="nav-bottom"
+          >
             <div class="left">
-              <router-link v-if="pageIndex > 0" :to="service.navEntries.value[pageIndex - 1].path">
-                <div class="link">
-                  < prev</div>
+              <router-link
+                v-if="pageIndex > 0"
+                :to="service.navEntries.value[pageIndex - 1].path"
+              >
+                <div class="link">< prev</div>
               </router-link>
             </div>
             <div class="progress-info center">
               {{ pageIndex + 1 }}/{{ service.navEntries.value.length }}
             </div>
             <div class="right">
-              <router-link v-if="pageIndex + 1 < service.navEntries.value.length"
-                :to="service.navEntries.value[pageIndex + 1]?.path">
+              <router-link
+                v-if="pageIndex + 1 < service.navEntries.value.length"
+                :to="service.navEntries.value[pageIndex + 1]?.path"
+              >
                 <div class="link next">next ></div>
               </router-link>
             </div>
@@ -55,25 +67,22 @@ import { computed } from "@vue/reactivity";
 import { AssessmentSessionService } from "@/services/assessmentSession";
 
 const route = useRoute();
-const basePath = computed(() => `/assessment-session/${route.params.assessmentSessionId}`);
-const assessmentSessionId = computed(() => parseInt(
-  Array.isArray(route.params.assessmentSessionId)
-    ? route.params.assessmentSessionId[0]
-    : route.params.assessmentSessionId
-));
+const basePath = computed(
+  () => `/assessment-session/${route.params.assessmentSessionId}`
+);
+const assessmentSessionId = computed(() =>
+  parseInt(
+    Array.isArray(route.params.assessmentSessionId)
+      ? route.params.assessmentSessionId[0]
+      : route.params.assessmentSessionId
+  )
+);
 
 const service = new AssessmentSessionService(assessmentSessionId, basePath);
 
 const pageIndex = computed(() =>
   service.navEntries.value.findIndex((entry) => entry.path === route.fullPath)
 );
-
-import { watch } from "vue";
-watch(() => service.boundLevels, () => {
-  if (service.boundLevels) {
-    console.log("boundLevels", service.boundLevels);
-  }
-}, { immediate: true });
 </script>
 
 <style scoped>

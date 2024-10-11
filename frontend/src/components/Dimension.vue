@@ -35,7 +35,9 @@ const props = defineProps<{
 }>();
 const dimension = computed(
   () =>
-    props.service.dimensions.value?.dimensions[parseInt(route.params.dimensionId as string)]
+    props.service.dimensions.value?.dimensions[
+      parseInt(route.params.dimensionId as string)
+    ]
 );
 const levels = props.service.getLevels(dimension);
 </script>

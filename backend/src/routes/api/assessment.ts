@@ -1,11 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
-import * as dimensionService from "@/services/dimension.js";
-import * as assessmentService from "@/services/assessment.js";
-import * as levelService from "@/services/level.js";
-import * as stateService from "@/services/state.js";
+import * as dimensionService from "../../services/dimension.js";
+import * as assessmentService from "../../services/assessment.js";
+import * as levelService from "../../services/level.js";
+import * as stateService from "../../services/state.js";
 import { ensureAuthenticated } from "./auth.js";
-import Assessment from "@/models/Assessment.js";
-import Dimension from "@/models/Dimension.js";
 
 const fetchAssessment = async (
   req: Request,

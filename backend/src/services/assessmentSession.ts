@@ -1,9 +1,13 @@
 import AssessmentSession, {
   AssessmentSessionAttributes,
-} from "@/models/AssessmentSession.js";
-import Dimension from "@/models/Dimension";
-import { Value, ValueAttributes } from "@/models/Value";
-import { Weight, WeightAttributes } from "@/models/Weight";
+} from "../models/AssessmentSession.js";
+import { Value, ValueAttributes } from "../models/Value";
+import { ValueReasoning } from "../models/ValueReasoning";
+import { Weight, WeightAttributes } from "../models/Weight";
+import {
+  WeightReasoning,
+  WeightReasoningAttributes,
+} from "../models/WeightReasoning";
 
 export const findAll = async (): Promise<AssessmentSession[]> => {
   const sessions: AssessmentSession[] = await AssessmentSession.findAll();
@@ -31,12 +35,27 @@ export const createLevelandWeightValue = async (sessionInfo: {
 }) => {
   await createLevelValue(sessionInfo);
   await createLevelWeight(sessionInfo);
+  await createLevelValueResioning(sessionInfo);
 };
 
 const createLevelValue = async (value: ValueAttributes) => {
-  Value.create(value);
+  await Value.create(value);
 };
 
 const createLevelWeight = async (weight: WeightAttributes) => {
-  Weight.create(weight);
+  await Weight.create(weight);
+};
+
+const createLevelValueResioning = async (value: ValueAttributes) => {
+  await ValueReasoning.create(value);
+};
+
+export const createWeightReasoning = async (
+  value: WeightReasoningAttributes
+) => {
+  await WeightReasoning.findOrCreate({
+    where: {
+      assessmentSessionId: value.assessmentSessionId,
+    },
+  });
 };

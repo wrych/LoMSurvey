@@ -3,10 +3,18 @@
   "version": "0.0.0",
   "main": "backend/app.js",
   "scripts": {
-    "start": "node dist/www.js",
+    "start": "dotenv -e .env.development -- node dist/www.js",
     "build": "tsc",
-    "dev": "dotenv -e .env.development -- npx tsx src/www.ts"
+    "dev": "dotenv -e .env.development -- npx tsx src/www.ts",
+    "clean": "rm -rf dist"
   },
+  "files": [
+    "dist",
+    "public",
+    "app",
+    "package.json",
+    "src/views"
+  ],
   "dependencies": {
     "argon2": "^0.41.1",
     "connect-session-sequelize": "^7.1.7",
@@ -45,6 +53,5 @@
     "dotenv-cli": "^7.4.2",
     "tsx": "^4.19.0",
     "typescript": "^5.5.4"
-  },
-  "type": "module"
+  }
 }

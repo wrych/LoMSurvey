@@ -1,16 +1,32 @@
 <template>
   <div class="levelselectorcontainer" v-if="props.dimension">
     <div class="info-container">
-      <span>Please select your mastery in the dimension
+      <span
+        >Please select your mastery in the dimension
         {{ props.dimension.title }} with the slider on the right hand
-        side.</span>
+        side.</span
+      >
     </div>
     <div class="descriptioncontainer">
-      <LevelDescription v-model="value" :dimension="props.dimension" :levels="props.levels" />
+      <LevelDescription
+        :service="props.service"
+        :dimension="props.dimension"
+        :levels="props.levels"
+      />
     </div>
     <div class="slidercontainer">
-      <LevelSlider v-model="value" />
-      <NumberInput v-model="value" class="number" label="Mastery" />
+      <LevelSlider
+        v-model="props.service.levelValues[dimension!.id].value.value"
+        :min="dimension!.min"
+        :max="dimension!.max"
+      />
+      <NumberInput
+        v-model="props.service.levelValues[dimension!.id].value.value"
+        class="number"
+        label="Mastery"
+        :min="dimension!.min"
+        :max="dimension!.max"
+      />
     </div>
   </div>
 </template>

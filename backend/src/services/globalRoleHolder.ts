@@ -1,7 +1,7 @@
-import GlobalRole from "@/models/GlobalRole.js";
+import GlobalRole from "../models/GlobalRole.js";
 import GlobalRoleHolder, {
   GlobalRoleHolderAttributes,
-} from "@/models/GlobalRoleHolder.js";
+} from "../models/GlobalRoleHolder.js";
 
 export const create = async (
   globalRoleHolder: GlobalRoleHolderAttributes

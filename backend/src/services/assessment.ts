@@ -1,4 +1,4 @@
-import Assessment, { AssessmentAttributes } from "@/models/Assessment.js";
+import Assessment, { AssessmentAttributes } from "../models/Assessment.js";
 
 export const findAll = async (): Promise<Assessment[]> => {
   const assessments: Assessment[] = await Assessment.findAll();

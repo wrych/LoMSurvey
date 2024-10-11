@@ -3,7 +3,7 @@ import { getJson, postJson } from "./common";
 import { Assessment, Assessments } from "@/models/Assessment";
 import { AssessmentSession } from "@/models/AssessmentSession";
 import { Dimension, Dimensions } from "@/models/Dimension";
-import { Level, Levels } from "@/models/Level";
+import { Level, Levels, type LevelDTO } from "@/models/Level";
 
 export const getAllStates = async (): Promise<States> => {
   return States.fromJSON((await getJson("/api/assessment/states")) as State[]);
@@ -43,6 +43,6 @@ export const getLevelsByDimensionId = async (
   dimensionId: number
 ): Promise<Levels> => {
   return Levels.fromJSON(
-    await getJson<Level[]>(`/api/assessment/dimension/${dimensionId}/levels`)
+    await getJson<LevelDTO[]>(`/api/assessment/dimension/${dimensionId}/levels`)
   );
 };

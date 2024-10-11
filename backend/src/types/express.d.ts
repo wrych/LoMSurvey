@@ -1,9 +1,9 @@
 import "express";
 import session from "express-session";
 
-import { Assessment } from "@/models/Assessment";
-import { Dimension } from "@/models/Dimension";
-import AssessmentSession from "@/models/AssessmentSession";
+import { Assessment } from "../models/Assessment";
+import { Dimension } from "../models/Dimension";
+import AssessmentSession from "../models/AssessmentSession";
 
 declare module "express" {
   interface Response {

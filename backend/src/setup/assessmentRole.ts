@@ -1,5 +1,5 @@
-import AssessmentRole from "@/models/AssessmentRole.js";
-import { create } from "@/services/assessmentRole.js";
+import AssessmentRole from "../models/AssessmentRole.js";
+import { create } from "../services/assessmentRole.js";
 
 export const setupAssessmentRoles = async (): Promise<AssessmentRole[]> => {
   return [

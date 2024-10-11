@@ -1,10 +1,10 @@
-import Dimension from "@/models/Dimension.js";
-import Level, { LevelAttributes } from "@/models/Level.js";
+import Dimension from "../models/Dimension.js";
+import Level, { LevelAttributes } from "../models/Level.js";
 import {
   LevelCapability,
   LevelCapabilityAttributes,
-} from "@/models/LevelCapability";
-import { LevelExample, LevelExampleAttributes } from "@/models/LevelExample";
+} from "../models/LevelCapability";
+import { LevelExample, LevelExampleAttributes } from "../models/LevelExample";
 
 export const findAll = async (): Promise<Level[]> => {
   const levels: Level[] = await Level.findAll();

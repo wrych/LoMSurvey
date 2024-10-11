@@ -1,4 +1,4 @@
-import { create } from "@/services/state.js";
+import { create } from "../services/state.js";
 
 export const setupStates = async (): Promise<void> => {
   await create({

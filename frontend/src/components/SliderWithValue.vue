@@ -8,26 +8,57 @@
     <div class="slidecontainer">
       <input
         type="range"
-        v-model="model"
-        min="0"
-        max="100"
+        :value="value"
+        @change="updatemodel"
+        @mouseup="updatemodel"
+        :min="props.min"
+        :max="props.max"
         class="slider"
         id="myRange"
       />
     </div>
     <div class="valuecontainer">
-      <NumberInput v-model="model" :decimals="2" />
+      <NumberInput v-model="model" :decimals="2" :default="100" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import NumberInput from "./NumberInput.vue";
 
 const model = defineModel();
 const props = defineProps({
   label: String,
+  default: {
+    type: Number,
+    default: 100,
+  },
+  min: {
+    type: Number,
+    default: 50,
+  },
+  max: {
+    type: Number,
+    default: 100,
+  },
 });
+
+const value = computed(() => {
+  if (!model.value) {
+    return props.default;
+  }
+  return model.value;
+});
+
+const updatemodel = (event: Event) => {
+  if (!event.target) {
+    console.warn("event.target is null");
+    return;
+  }
+  const input = event.target as HTMLInputElement;
+  model.value = parseFloat(input.value);
+};
 </script>
 
 <style scoped>

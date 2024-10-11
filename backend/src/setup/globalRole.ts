@@ -1,5 +1,5 @@
-import GlobalRole from "@/models/GlobalRole.js";
-import { create } from "@/services/globalRole.js";
+import GlobalRole from "../models/GlobalRole.js";
+import { create } from "../services/globalRole.js";
 
 export const setupGlobalRoles = async (): Promise<GlobalRole> => {
   return await create({

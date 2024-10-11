@@ -1,6 +1,7 @@
 .env
 .env.development
 var
+app
 
 # Node.js
 node_modules/

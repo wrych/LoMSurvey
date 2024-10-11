@@ -1,9 +1,9 @@
-import ORM from "@/data/ORM.js";
-import { MigrationStep } from "@/models/Migration.js";
+import ORM from "./data/ORM.js";
+import { MigrationStep } from "./models/Migration.js";
 import {
   isMigrationComplete,
   markMigrationComplete,
-} from "@/services/migration.js";
+} from "./services/migration.js";
 import { setupAll } from "./setup/all.js";
 
 const syncDatabase = async () => {

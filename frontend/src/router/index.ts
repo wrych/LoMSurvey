@@ -41,6 +41,11 @@ const router = createRouter({
           ],
         },
         {
+          path: "weights",
+          name: "Weights",
+          component: () => import("../components/Weights.vue"),
+        },
+        {
           path: "summary",
           name: "Summary",
           component: () => import("../components/Summary.vue"),

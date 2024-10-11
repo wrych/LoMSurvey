@@ -1,53 +1,125 @@
 import { useAssessmentSessionStore } from "@/stores/assessmentSession";
 import { toRef, type Ref } from "vue";
 import * as assessmentSessionApi from "@/apis/assessmentSession";
-import type { LevelValue } from "@/models/LevelValue";
+import { LevelValue } from "@/models/LevelValue";
+import type { ValueReasoning } from "@/models/ValueReasoning";
+import type { LevelWeight } from "@/models/LevelWeight";
+import type { WeightReasoning } from "@/models/WeightReasoning";
 
 export class AssessmentSessionRepository {
   private store = useAssessmentSessionStore();
+
+  getWeightReasoning = (assessmentSessionId: number): Ref<WeightReasoning> => {
+    if (!this.store.weightReasonings[assessmentSessionId]) {
+      this.store.weightReasonings[assessmentSessionId] = {
+        id: -1,
+        assessmentSessionId,
+        text: null,
+      };
+    }
+    this.updateWeightReasoning(assessmentSessionId);
+    return toRef(this.store.weightReasonings, assessmentSessionId);
+  };
+
+  updateWeightReasoning = async (
+    assessmentSessionId: number
+  ): Promise<void> => {
+    const lv =
+      await assessmentSessionApi.getWeightReasoning(assessmentSessionId);
+    if (!lv) return;
+    this.store.weightReasonings[assessmentSessionId] = lv;
+  };
+
+  getLevelWeight = (
+    assessmentSessionId: number,
+    dimensionId: number
+  ): Ref<LevelWeight> => {
+    const index = `${assessmentSessionId}_${dimensionId}`;
+    if (!this.store.levelWeights[index]) {
+      this.store.levelWeights[index] = {
+        id: -1,
+        assessmentSessionId,
+        dimensionId,
+        value: null,
+      };
+    }
+    this.updateLevelWeight(assessmentSessionId, dimensionId, index);
+    return toRef(this.store.levelWeights, index);
+  };
+
+  updateLevelWeight = async (
+    assessmentSessionId: number,
+    dimensionId: number,
+    index: string
+  ): Promise<void> => {
+    const lv = await assessmentSessionApi.getWeight(
+      assessmentSessionId,
+      dimensionId
+    );
+    if (!lv) return;
+    this.store.levelWeights[index] = lv;
+  };
 
   getLevelValue = (
     assessmentSessionId: number,
     dimensionId: number
   ): Ref<LevelValue> => {
-    const levelValue = this.store.levelValues.find(
-      (lv) =>
-        lv.assessmentSessionId === assessmentSessionId &&
-        lv.dimensionId === dimensionId
-    );
-    if (!levelValue) {
-      this.store.levelValues.push({
+    const index = `${assessmentSessionId}_${dimensionId}`;
+    if (!this.store.levelValues[index]) {
+      this.store.levelValues[index] = {
+        id: -1,
         assessmentSessionId,
         dimensionId,
         value: null,
-      });
+      };
     }
-    const index = this.store.levelValues.findIndex(
-      (lv) =>
-        lv.assessmentSessionId === assessmentSessionId &&
-        lv.dimensionId === dimensionId
-    );
-    const value = toRef(this.store.levelValues, index);
-    this.updateLevelValue(assessmentSessionId, dimensionId, value);
-    return value;
+    this.updateLevelValue(assessmentSessionId, dimensionId, index);
+    return toRef(this.store.levelValues, index);
   };
 
   updateLevelValue = async (
     assessmentSessionId: number,
     dimensionId: number,
-    value: Ref<LevelValue>
+    index: string
   ): Promise<void> => {
     const lv = await assessmentSessionApi.getLevel(
       assessmentSessionId,
       dimensionId
     );
-    if (!lv) {
-      throw new Error("Level value not found");
+    if (!lv) return;
+    this.store.levelValues[index] = lv;
+  };
+
+  getValueReasoning = (
+    assessmentSessionId: number,
+    dimensionId: number
+  ): Ref<ValueReasoning> => {
+    const index = `${assessmentSessionId}_${dimensionId}`;
+    if (!this.store.valueReasonings[index]) {
+      this.store.valueReasonings[index] = {
+        id: -1,
+        assessmentSessionId,
+        dimensionId,
+        text: null,
+      };
     }
-    value.value = lv;
+    this.updateValueReasoning(assessmentSessionId, dimensionId, index);
+    return toRef(this.store.valueReasonings, index);
+  };
+
+  updateValueReasoning = async (
+    assessmentSessionId: number,
+    dimensionId: number,
+    index: string
+  ): Promise<void> => {
+    const lv = await assessmentSessionApi.getValueReasoning(
+      assessmentSessionId,
+      dimensionId
+    );
+    if (!lv) return;
+    this.store.valueReasonings[index] = lv;
   };
 }
-
 let assessmentSessionRepository: AssessmentSessionRepository | null = null;
 
 export const useAssessmentSessionRepository =

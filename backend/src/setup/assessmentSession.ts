@@ -1,10 +1,11 @@
-import Assessment from "@/models/Assessment.js";
-import AssessmentSession from "@/models/AssessmentSession.js";
-import Dimension from "@/models/Dimension";
+import Assessment from "../models/Assessment.js";
+import AssessmentSession from "../models/AssessmentSession.js";
+import Dimension from "../models/Dimension";
 import {
   create,
   createLevelandWeightValue,
-} from "@/services/assessmentSession.js";
+  createWeightReasoning,
+} from "../services/assessmentSession.js";
 
 export const setupAssessmentSessions = async (
   assessment: Assessment,
@@ -19,5 +20,6 @@ export const setupAssessmentSessions = async (
       dimensionId: dimension.id,
     });
   });
+  await createWeightReasoning({ assessmentSessionId: session.id });
   return session;
 };

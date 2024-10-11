@@ -43,7 +43,15 @@ export class Levels {
     this.levels = Object.fromEntries(assessments.map((a) => [a.id, a]));
   }
 
-  static fromJSON(json: Level[]): Levels {
+  static fromJSON(json: LevelDTO[]): Levels {
     return new Levels(json.map((a) => Level.fromJSON(a)));
   }
+}
+
+export interface LevelDTO {
+  id: number;
+  LevelCapabilities: { capability: string }[];
+  LevelExamples: { example: string }[];
+  level: number;
+  dimensionId: number;
 }

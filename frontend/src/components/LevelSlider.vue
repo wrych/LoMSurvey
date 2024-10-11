@@ -3,8 +3,8 @@
     :value="value"
     @input="updatemodel"
     type="range"
-    min="40"
-    max="120"
+    :min="props.min * 10"
+    :max="props.max * 10"
     class="slider"
   />
 </template>
@@ -13,6 +13,21 @@
 import { computed, type ModelRef } from "vue";
 
 const model: ModelRef<number | undefined> = defineModel();
+
+const props = defineProps({
+  min: {
+    type: Number,
+    default: 0,
+  },
+  max: {
+    type: Number,
+    default: 10,
+  },
+  default: {
+    type: Number,
+    default: 8.0,
+  },
+});
 
 const updatemodel = (event: Event) => {
   if (!event.target) {
@@ -25,8 +40,7 @@ const updatemodel = (event: Event) => {
 
 const value = computed(() => {
   if (!model.value) {
-    console.warn("unexpected undefined value provided");
-    return model.value;
+    return props.default * 10;
   }
   return `${model.value * 10}`;
 });

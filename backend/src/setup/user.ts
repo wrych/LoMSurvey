@@ -1,5 +1,5 @@
-import User from "@/models/User.js";
-import { create } from "@/services/user.js";
+import User from "../models/User.js";
+import { create } from "../services/user.js";
 
 const emails = [
   "andy.moesch@dectris.com",

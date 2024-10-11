@@ -10,6 +10,9 @@ import {
 } from "@/repositories/assessmentSession";
 import type { LevelValue } from "@/models/LevelValue";
 import * as assessmentSessionApi from "@/apis/assessmentSession";
+import type { ValueReasoning } from "@/models/ValueReasoning";
+import type { LevelWeight } from "@/models/LevelWeight";
+import type { WeightReasoning } from "@/models/WeightReasoning";
 
 const assessmentService = useAssessmentService();
 
@@ -23,7 +26,10 @@ export class AssessmentSessionService {
   navEntries = computed<{ title: string; path: string }[]>(() => {
     return this.updateNavEntries(this.basePath.value);
   });
-  boundLevels: Record<number, Ref<LevelValue>> = {};
+  levelValues: Record<number, Ref<LevelValue>> = {};
+  levelReasonings: Record<number, Ref<ValueReasoning>> = {};
+  levelWeights: Record<number, Ref<LevelWeight>> = {};
+  weightReasoning = ref<WeightReasoning | undefined>(undefined);
 
   constructor(
     id: Ref<number>,
@@ -51,6 +57,7 @@ export class AssessmentSessionService {
         const a = assessmentService.getAssessmentById(
           this.assessmentSession.value.assessmentId
         );
+        this.bindWeightReasoning(this.assessmentSession.value.id);
         watch(a, () => {
           this.assessment.value = a.value;
         });
@@ -69,6 +76,8 @@ export class AssessmentSessionService {
           this.dimensions.value = ds.value;
           Object.values(ds.value!.dimensions).forEach((d) => {
             this.bindLevel(d);
+            this.bindReasoning(d);
+            this.bindWeights(d);
           });
         });
       }
@@ -99,7 +108,7 @@ export class AssessmentSessionService {
     }
     navEntries.push({
       title: "Weights",
-      path: `${basePath}/weight`,
+      path: `${basePath}/weights`,
     });
     navEntries.push({
       title: "Summary",
@@ -130,23 +139,65 @@ export class AssessmentSessionService {
   };
 
   bindLevel = (dimension: Dimension) => {
-    if (!this.boundLevels[dimension.id]) {
-      this.boundLevels[dimension.id] = this.repository.getLevelValue(
+    if (!this.levelValues[dimension.id]) {
+      this.levelValues[dimension.id] = this.repository.getLevelValue(
         this.assessmentSession.value!.id,
         dimension.id
       );
       watch(
-        () => this.boundLevels[dimension.id],
-        async (newValue) => {
-          //     const newLevel = assessmentSessionApi.setLevel(
-          //     dimension.id,
-          //     newValue
-          //   );
-          //   this.repository.updateLevelValue(newLevel);
+        () => this.levelValues[dimension.id].value.value,
+        async () => {
+          assessmentSessionApi.setLevel(this.levelValues[dimension.id].value);
         }
       );
     }
-    return this.boundLevels[dimension.id];
+    return this.levelValues[dimension.id];
+  };
+
+  bindReasoning = (dimension: Dimension) => {
+    if (!this.levelReasonings[dimension.id]) {
+      this.levelReasonings[dimension.id] = this.repository.getValueReasoning(
+        this.assessmentSession.value!.id,
+        dimension.id
+      );
+      watch(
+        () => this.levelReasonings[dimension.id].value.text,
+        async () => {
+          assessmentSessionApi.setValueReasoning(
+            this.levelReasonings[dimension.id].value
+          );
+        }
+      );
+    }
+    return this.levelReasonings[dimension.id];
+  };
+
+  bindWeights = (dimension: Dimension) => {
+    if (!this.levelWeights[dimension.id]) {
+      this.levelWeights[dimension.id] = this.repository.getLevelWeight(
+        this.assessmentSession.value!.id,
+        dimension.id
+      );
+      watch(
+        () => this.levelWeights[dimension.id].value.value,
+        async () => {
+          assessmentSessionApi.setWeight(this.levelWeights[dimension.id].value);
+        }
+      );
+    }
+    return this.levelWeights[dimension.id];
+  };
+
+  bindWeightReasoning = (assessmentSessionId: number) => {
+    const wr = this.repository.getWeightReasoning(assessmentSessionId);
+    watch(
+      () => wr.value.text,
+      async () => {
+        console.log(wr.value);
+        assessmentSessionApi.setWeightReasoning(wr.value);
+      }
+    );
+    this.weightReasoning = wr;
   };
 }
 

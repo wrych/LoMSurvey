@@ -1,5 +1,5 @@
-import User from "@/models/User.js";
-import { getGlobalRolesByUserId } from "@/services/globalRoleHolder.js";
+import User from "../../models/User.js";
+import { getGlobalRolesByUserId } from "../../services/globalRoleHolder.js";
 import express, { Request, Response, NextFunction } from "express";
 
 const router = express.Router();
