@@ -68,7 +68,7 @@ const overallLom = computed(() => {
 .main {
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
   position: relative;
 }
 h2,

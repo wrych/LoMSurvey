@@ -12,8 +12,8 @@
               </li>
             </ul>
           </div>
-          <RouterLink :to="`/assessment-session/1`">Test1</RouterLink>
-          <RouterLink :to="`/assessment-session/2`">Test2</RouterLink>
+          <RouterLink :to="`/assessment-session/1/`">Test1</RouterLink>
+          <RouterLink :to="`/assessment-session/2/`">Test2</RouterLink>
         </div>
         <div v-else>
           <p>Loading states...</p>
