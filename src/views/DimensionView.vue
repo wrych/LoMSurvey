@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import LevelSelector from "@/components/LevelSelector.vue";
 import { useRoute } from "vue-router";
-import dimensions, {
-  values,
-  type Dimension,
-  type dimensionId,
-} from "@/dimensions";
-import { ref, toRef, watch } from "vue";
+import dimensions, { values, type dimensionId } from "@/dimensions";
+import { computed, ref, toRef, watch, type PropType } from "vue";
+import { RouterView } from "vue-router";
+import * as textblocks from "@/textblocks";
 
+const props = defineProps({
+  language: {
+    type: String as PropType<textblocks.languageIndicies>,
+    required: true,
+  },
+});
 const route = useRoute();
-const dimension = ref<Dimension | undefined>(undefined);
 let value = ref<number | undefined>(undefined);
+const dimension = computed(() =>
+  dimensions.find((d) => d.id === route.params.id)
+);
 
 const updateRefs = () => {
   const id = route.params.id;
-  dimension.value = dimensions.find((d) => d.id === id);
   value = toRef(values.value, id as dimensionId);
 };
 
@@ -23,7 +27,22 @@ watch(() => route.params.id, updateRefs, { immediate: true });
 
 <template>
   <main>
-    <LevelSelector v-if="dimension" :dimension="dimension" v-model="value" />
+    <div v-if="dimension && props.language" class="main">
+      <h2>{{ dimension.name[props.language] }}</h2>
+      <RouterView
+        :dimension="dimension"
+        :language="props.language"
+        v-model="value"
+      />
+    </div>
     <div v-else>Error!</div>
   </main>
 </template>
+
+<style scoped>
+.main {
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+}
+</style>

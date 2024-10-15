@@ -1,11 +1,10 @@
 <template>
-  <div class="levelselectorcontianer">
-    <div class="titlecontainer">
-      <h2 class="highlight">Dimension {{ props.dimension.name }}</h2>
-    </div>
-    <div>
-      <LevelDescriptions v-model="value" :dimension="props.dimension" />
-    </div>
+  <div class="levelselectorcontainer">
+    <LevelDescriptions
+      v-model="value"
+      :dimension="props.dimension"
+      :language="language"
+    />
     <div class="slidercontainer">
       <LevelSlider v-model="value" />
       <NumberInput v-model="value" class="number" />
@@ -19,6 +18,7 @@ import NumberInput from "./NumberInput.vue";
 import LevelDescriptions from "./LevelDescriptions.vue";
 import { type Dimension } from "@/dimensions";
 import type { PropType } from "vue";
+import * as textblocks from "@/textblocks";
 
 const value = defineModel();
 const props = defineProps({
@@ -26,24 +26,20 @@ const props = defineProps({
     type: Object as PropType<Dimension>,
     required: true,
   },
+  language: {
+    type: String as PropType<textblocks.languageIndicies>,
+    required: true,
+  },
 });
 </script>
 
 <style scoped>
-.levelselectorcontianer {
-  width: 100%;
-  max-width: 581px;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 5fr 1fr;
-  grid-template-rows: min-content 1fr;
-  grid-gap: 5px;
-}
-.descriptioncontainer {
-  background-color: blueviolet;
+.levelselectorcontainer {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  grid-gap: 10px;
 }
 .slidercontainer {
   display: grid;
@@ -51,11 +47,6 @@ const props = defineProps({
   align-items: center;
   width: 100%;
   height: 100%;
-}
-.titlecontainer {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  height: min-content;
 }
 .number {
   height: 30px;

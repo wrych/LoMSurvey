@@ -7,13 +7,24 @@
       class="leveldescription"
     >
       <h3 @click="selectLevel(lvl.value)">Level {{ lvl.value }}</h3>
-      <span>Employees in {{ dimension.name }} level {{ lvl.value }}...</span>
+      <span
+        >{{
+          textblocks.capitalitzeFirstLetter(
+            textblocks.employees[props.language]
+          )
+        }}
+        in
+        {{ dimension.name[props.language] }}
+        level {{ lvl.value }}...</span
+      >
       <ul>
-        <li v-for="c in lvl.capabilities">{{ c }}</li>
+        <li v-for="c in lvl.capabilities[props.language]">{{ c }}</li>
       </ul>
-      <span>Examples</span>
+      <span>{{
+        textblocks.capitalitzeFirstLetter(textblocks.examples[props.language])
+      }}</span>
       <ul>
-        <li v-for="c in lvl.examples">{{ c }}</li>
+        <li v-for="c in lvl.examples[props.language]">{{ c }}</li>
       </ul>
     </div>
   </div>
@@ -22,10 +33,15 @@
 <script setup lang="ts">
 import { type Dimension } from "@/dimensions";
 import { computed, watch, type ModelRef, type PropType } from "vue";
+import * as textblocks from "@/textblocks";
 
 const props = defineProps({
   dimension: {
     type: Object as PropType<Dimension>,
+    required: true,
+  },
+  language: {
+    type: String as PropType<textblocks.languageIndicies>,
     required: true,
   },
 });
@@ -34,8 +50,9 @@ const selectLevel = (selectedLevel: number) => {
   level.value = selectedLevel;
 };
 
-const dimension = props.dimension;
-const levels = dimension.levels.sort((a, b) => b.value - a.value);
+const levels = computed(() =>
+  props.dimension.levels.sort((a, b) => b.value - a.value)
+);
 
 const computedStyling = computed(() => {
   const vs: Record<string, string> = {};
@@ -43,10 +60,10 @@ const computedStyling = computed(() => {
   if (!cLvl) {
     throw Error("level must not be undefined");
   }
-  const lvlOffset = 1;
+  const lvlOffset = 0.5;
   let nTop = 0;
-  let nBottom = levels.filter((l) => l.value < cLvl - 1).length;
-  levels.forEach((lvl) => {
+  let nBottom = levels.value.filter((l) => l.value < cLvl - 1).length;
+  levels.value.forEach((lvl) => {
     if (lvl.value > cLvl + 1) {
       vs[lvl.value] =
         `top: ${nTop * lvlOffset}%; left: ${(nTop * lvlOffset) / 4}%; z-index: ${10 + nTop};`;
@@ -58,7 +75,7 @@ const computedStyling = computed(() => {
     } else {
       const diff = cLvl - lvl.value;
       vs[lvl.value] =
-        `top: ${30 * diff + 40}%;left: ${((Math.max(nTop, nBottom) + 2 - Math.round(diff)) * lvlOffset) / 4}%; z-index: ${Math.round(40 - Math.abs(diff) * 10)}`;
+        `top: ${30 * diff + 40}%;left: ${((Math.max(nTop, nBottom) + lvlOffset - Math.round(diff)) * lvlOffset) / 4}%; z-index: ${Math.round(40 - Math.abs(diff) * 10)}`;
     }
   });
   return vs;

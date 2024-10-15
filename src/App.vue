@@ -1,87 +1,98 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import Navigation from "./components/Navigation.vue";
+import { RouterLink, RouterView, useRoute } from "vue-router";
 import dimensions from "./dimensions";
+import { computed } from "vue";
+import * as textblocks from "./textblocks";
+import LanguageSwitcher from "./components/LanguageSwitcher.vue";
+
+const route = useRoute();
+const language = computed(
+  () =>
+    ((route.params.language as string) || "en") as textblocks.languageIndicies
+);
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <Navigation msg="Level of Mastery" />
-
-      <nav>
-        <span>Introduction</span>
-        <RouterLink to="/">Introduction</RouterLink>
-        <span v-for="d in dimensions">
-          {{ d.name }}
-          <RouterLink :to="`/dimension/${d.id}`">Level</RouterLink>
-          <RouterLink :to="`/reasoning/${d.id}`">Track Record</RouterLink>
-        </span>
-        <span>Overall</span>
-        <RouterLink to="/weight">Weight</RouterLink>
-        <RouterLink to="/summary">Summary</RouterLink>
-      </nav>
+  <div class="wrapper">
+    <div class="content">
+      <div class="language-switcher">
+        <LanguageSwitcher />
+      </div>
+      <header>
+        <h1 class="highlight">{{ textblocks.level_of_mastery[language] }}</h1>
+        <nav>
+          <div v-for="d in dimensions">
+            <RouterLink :to="`/${language}/dimension/${d.id}`">
+              {{ d.name[language] }}
+            </RouterLink>
+            <RouterLink
+              :to="`/${language}/dimension/${d.id}/levels`"
+              class="sub-item"
+            >
+              {{ textblocks.level_selection[language] }}
+            </RouterLink>
+          </div>
+        </nav>
+      </header>
+      <RouterView :language="language" />
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.wrapper {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+}
+
+.content {
+  position: relative;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  height: 100vh;
+  width: 100vw;
+}
+
+.language-switcher {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
 nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  display: none;
 }
 
-nav a.router-link-exact-active {
+nav > div {
+  display: grid;
+}
+
+.sub-item {
+  font-size: small;
+  padding-left: 1rem;
+}
+
+a.router-link-active {
+  background-color: var(--color-background-soft);
+}
+
+a.router-link-exact-active {
   color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
+  background-color: var(--color-background-soft);
 }
 
 @media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
   nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
 
-    padding: 1rem 0;
-    margin-top: 1rem;
+  .content {
+    width: 100vw;
+    max-width: 1280px;
   }
 }
 </style>
