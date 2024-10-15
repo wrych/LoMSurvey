@@ -1,11 +1,9 @@
 import { DataTypes, Model } from "sequelize";
 import ORM from "../data/ORM.js";
-import State from "./State.js";
 
 interface AssessmentAttributes {
   id?: number;
   title: string;
-  stateId: number;
 }
 
 class Assessment
@@ -14,7 +12,6 @@ class Assessment
 {
   declare id: number;
   declare title: string;
-  declare stateId: number;
 }
 
 Assessment.init(
@@ -28,14 +25,6 @@ Assessment.init(
     title: {
       type: DataTypes.TEXT,
       allowNull: false,
-    },
-    stateId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: State,
-        key: "id",
-      },
     },
   },
   {

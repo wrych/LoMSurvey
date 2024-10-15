@@ -1,13 +1,7 @@
-import { State, States } from "@/models/State";
-import { getJson, postJson } from "./common";
+import { getJson } from "./common";
 import { Assessment, Assessments } from "@/models/Assessment";
-import { AssessmentSession } from "@/models/AssessmentSession";
 import { Dimension, Dimensions } from "@/models/Dimension";
-import { Level, Levels, type LevelDTO } from "@/models/Level";
-
-export const getAllStates = async (): Promise<States> => {
-  return States.fromJSON((await getJson("/api/assessment/states")) as State[]);
-};
+import { Levels, type LevelDTO } from "@/models/Level";
 
 export const getAllAssessments = async (): Promise<Assessments> => {
   return Assessments.fromJSON(await getJson<Assessment[]>("/api/assessment/"));
@@ -16,14 +10,6 @@ export const getAllAssessments = async (): Promise<Assessments> => {
 export const getAssessment = async (id: number): Promise<Assessment> => {
   return Assessment.fromJSON(
     await getJson<Assessment>(`/api/assessment/${id}`)
-  );
-};
-
-export const getAssessmentSession = async (
-  id: number
-): Promise<AssessmentSession> => {
-  return AssessmentSession.fromJSON(
-    await getJson<AssessmentSession>(`/api/assessment-session/${id}`)
   );
 };
 

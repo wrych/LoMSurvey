@@ -26,6 +26,7 @@ declare module "express" {
 declare module "express-serve-static-core" {
   interface Request {
     assessment?: Assessment;
+    permissions?: Assessment;
     assessmentSession?: AssessmentSession;
     dimension?: Dimension;
   }

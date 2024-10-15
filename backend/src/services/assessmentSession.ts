@@ -8,6 +8,7 @@ import {
   WeightReasoning,
   WeightReasoningAttributes,
 } from "../models/WeightReasoning";
+import * as assessmentService from "./assessment.js";
 
 export const findAll = async (): Promise<AssessmentSession[]> => {
   const sessions: AssessmentSession[] = await AssessmentSession.findAll();
@@ -20,6 +21,14 @@ export const findById = async (
   const session: AssessmentSession | null =
     await AssessmentSession.findByPk(id);
   return session;
+};
+
+export const getState = async (id: number) => {
+  const session = await findById(id);
+  if (!session) {
+    return null;
+  }
+  return session.stateId;
 };
 
 export const create = async (
@@ -53,9 +62,20 @@ const createLevelValueResioning = async (value: ValueAttributes) => {
 export const createWeightReasoning = async (
   value: WeightReasoningAttributes
 ) => {
-  await WeightReasoning.findOrCreate({
-    where: {
-      assessmentSessionId: value.assessmentSessionId,
-    },
-  });
+  const findOrCreate = async () => {
+    await WeightReasoning.findOrCreate({
+      where: {
+        assessmentSessionId: value.assessmentSessionId,
+      },
+    });
+  };
+  for (let i = 0; i < 5; i++) {
+    try {
+      await findOrCreate();
+    } catch (error) {
+      console.warn(
+        `Error creating weight reasoning, retrying (${i}/5), error: ${error}`
+      );
+    }
+  }
 };

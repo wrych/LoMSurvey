@@ -5,16 +5,15 @@ import {
   type AssessmentRepository,
 } from "@/repositories/assessment";
 import { ref, watch, type Ref } from "vue";
-import { useAuthService, type AuthService } from "./auth";
-import type { AuthUser } from "@/models/AuthUser";
-import type { AssessmentSession } from "@/models/AssessmentSession";
+import type {
+  AssessmentSession,
+  AssessmentSessions,
+} from "@/models/AssessmentSession";
 import type { Dimensions } from "@/models/Dimension";
 import type { Levels } from "@/models/Level";
 
 class AssessmentService {
   private repository: AssessmentRepository;
-  private authService: AuthService;
-  private user: Ref<AuthUser | undefined | null>;
 
   getDimensionsByAssessmentId = (id: number): Ref<Dimensions | undefined> => {
     return this.repository.getDimensionsByAssessmentId(id);
@@ -72,36 +71,19 @@ class AssessmentService {
   };
 
   getAllAssessments = (): Ref<Assessments | undefined> => {
-    if (!this.user.value) {
-      const unwatch = watch(this.user, () => {
-        if (this.user.value) {
-          this.repository.updateAssessments();
-          unwatch();
-        }
-      });
-    }
-    return this.repository.getAllAssessments(this.user.value ? false : true);
+    return this.repository.getAllAssessments();
+  };
+
+  getAllAssessmentSessions = (): Ref<AssessmentSessions | undefined> => {
+    return this.repository.getAllAssessmentSessions();
   };
 
   getAllStates = (): Ref<States | undefined> => {
-    if (!this.user.value) {
-      const unwatch = watch(this.user, () => {
-        if (this.user.value) {
-          this.repository.updateStates();
-          unwatch();
-        }
-      });
-    }
-    return this.repository.getAllStates(this.user.value ? false : true);
+    return this.repository.getAllStates();
   };
 
-  constructor(
-    repository: AssessmentRepository = useAssessmentRepository(),
-    authService: AuthService = useAuthService()
-  ) {
+  constructor(repository: AssessmentRepository = useAssessmentRepository()) {
     this.repository = repository;
-    this.authService = authService;
-    this.user = this.authService.getUser();
   }
 }
 

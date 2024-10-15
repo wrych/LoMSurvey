@@ -1,9 +1,44 @@
-import { State, States } from "@/models/State";
 import { getJson, postJson } from "./common";
 import { LevelValue } from "@/models/LevelValue";
 import { ValueReasoning } from "@/models/ValueReasoning";
 import { LevelWeight } from "@/models/LevelWeight";
 import { WeightReasoning } from "@/models/WeightReasoning";
+import { AssessmentSessionAuth } from "@/models/AssessmentSessionAuth";
+import {
+  AssessmentSession,
+  AssessmentSessions,
+} from "@/models/AssessmentSession";
+import { State, States } from "@/models/State";
+
+export const getAssessmentSession = async (
+  id: number
+): Promise<AssessmentSession> => {
+  return AssessmentSession.fromJSON(
+    await getJson<AssessmentSession>(`/api/assessment-session/${id}`)
+  );
+};
+
+export const getAssessmentSessions = async (): Promise<AssessmentSessions> => {
+  return AssessmentSessions.fromJSON(
+    await getJson<AssessmentSession[]>("/api/assessment-session/")
+  );
+};
+
+export const getAllStates = async (): Promise<States> => {
+  return States.fromJSON(
+    await getJson<State[]>("/api/assessment-session/state")
+  );
+};
+
+export const getPermissions = async (
+  assessmentSessionId: number
+): Promise<AssessmentSessionAuth> => {
+  return AssessmentSessionAuth.fromJSON(
+    await getJson<AssessmentSessionAuth>(
+      `/api/assessment-session/${assessmentSessionId}/permissions`
+    )
+  );
+};
 
 export const getLevel = async (
   assessmentSessionId: number,

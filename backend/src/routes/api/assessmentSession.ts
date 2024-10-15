@@ -1,6 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
+import * as stateService from "../../services/state.js";
 import * as dimensionService from "../../services/dimension.js";
 import * as assessmentSessionService from "../../services/assessmentSession.js";
+import * as assessmentRoleHolderService from "../../services/assessmentRoleHolder.js";
 import { ensureAuthenticated } from "./auth.js";
 import { Value } from "../../models/Value.js";
 import { Weight } from "../../models/Weight.js";
@@ -17,6 +19,14 @@ const fetchAssessmentSession = async (
     await assessmentSessionService.findById(assessmentSessionId);
   if (!assessmentSession) {
     return res.status(404).json({ message: "assessment not found" });
+  }
+  const permissions = await assessmentRoleHolderService.getPermissions(
+    assessmentSession.id,
+    req.user!.id
+  );
+  req.permissions = permissions;
+  if (!permissions.canView) {
+    return res.status(403).json({ message: "No access!" });
   }
   req.assessmentSession = assessmentSession;
   next();
@@ -36,6 +46,17 @@ const fetchDimension = async (
   next();
 };
 
+const ensureWritePermission = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (!req.permissions.canWrite) {
+    return res.status(403).json({ message: "No write access!" });
+  }
+  next();
+};
+
 const router = express.Router();
 
 router.get("/", ensureAuthenticated, async (req: Request, res: Response) => {
@@ -44,11 +65,44 @@ router.get("/", ensureAuthenticated, async (req: Request, res: Response) => {
 });
 
 router.get(
+  "/state",
+  ensureAuthenticated,
+  async (req: Request, res: Response) => {
+    const states = await stateService.findAllStates();
+    res.status(200).json(states);
+  }
+);
+
+router.get(
   "/:assessmentSessionId/",
   ensureAuthenticated,
   fetchAssessmentSession,
   async (req: Request, res: Response) => {
     res.status(200).json(req.assessmentSession!);
+  }
+);
+
+router.get(
+  "/:assessmentSessionId/roles",
+  ensureAuthenticated,
+  fetchAssessmentSession,
+  async (req: Request, res: Response) => {
+    res
+      .status(200)
+      .json(
+        await assessmentRoleHolderService.getRoleHolders(
+          req.assessmentSession!.id
+        )
+      );
+  }
+);
+
+router.get(
+  "/:assessmentSessionId/permissions",
+  ensureAuthenticated,
+  fetchAssessmentSession,
+  async (req: Request, res: Response) => {
+    res.status(200).json(req.permissions);
   }
 );
 
@@ -69,6 +123,7 @@ router.post(
   "/:assessmentSessionId/weight-reasoning",
   ensureAuthenticated,
   fetchAssessmentSession,
+  ensureWritePermission,
   async (req: Request, res: Response) => {
     const wr = await WeightReasoning.findOne({
       where: { assessmentSessionId: req.assessmentSession!.id },
@@ -104,6 +159,7 @@ router.post(
   ensureAuthenticated,
   fetchAssessmentSession,
   fetchDimension,
+  ensureWritePermission,
   async (req: Request, res: Response) => {
     const level = await Value.findOne({
       where: {
@@ -142,6 +198,7 @@ router.post(
   ensureAuthenticated,
   fetchAssessmentSession,
   fetchDimension,
+  ensureWritePermission,
   async (req: Request, res: Response) => {
     const weight = await Weight.findOne({
       where: {
@@ -180,6 +237,7 @@ router.post(
   ensureAuthenticated,
   fetchAssessmentSession,
   fetchDimension,
+  ensureWritePermission,
   async (req: Request, res: Response) => {
     const reasoning = await ValueReasoning.findOne({
       where: {

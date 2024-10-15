@@ -2,10 +2,12 @@ import { DataTypes, Model } from "sequelize";
 import ORM from "../data/ORM.js";
 import User from "./User.js";
 import AssessmentRole from "./AssessmentRole.js";
+import AssessmentSession from "./AssessmentSession.js";
 
 export interface AssessmentRoleHolderAttributes {
   id?: number;
   assessmentRoleId: number;
+  assessmentSessionId: number;
   userId: number;
 }
 
@@ -15,6 +17,7 @@ class AssessmentRoleHolder
 {
   declare id: number;
   declare assessmentRoleId: number;
+  declare assessmentSessionId: number;
   declare userId: number;
 }
 
@@ -31,6 +34,14 @@ AssessmentRoleHolder.init(
       allowNull: false,
       references: {
         model: AssessmentRole,
+        key: "id",
+      },
+    },
+    assessmentSessionId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: AssessmentSession,
         key: "id",
       },
     },
@@ -55,8 +66,14 @@ AssessmentRoleHolder.belongsTo(AssessmentRole, {
   foreignKey: "assessmentRoleId",
 });
 AssessmentRoleHolder.belongsTo(User, { foreignKey: "userId" });
+AssessmentRoleHolder.belongsTo(AssessmentSession, {
+  foreignKey: "assessmentSessionId",
+});
 
 AssessmentRole.hasMany(AssessmentRoleHolder, {
   foreignKey: "assessmentRoleId",
 });
 User.hasMany(AssessmentRoleHolder, { foreignKey: "userId" });
+AssessmentSession.hasMany(AssessmentRoleHolder, {
+  foreignKey: "assessmentSessionId",
+});

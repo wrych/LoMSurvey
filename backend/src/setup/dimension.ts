@@ -16,7 +16,7 @@ export const setupDimensions = async (
       12,
     ],
     [
-      "Subject Matter Expertis",
+      "Subject Matter Expertise",
       "The dimension 'Subject Matter Expertise' measures an individual's level of acumen and authority in a specific domain. Each level represents an increasing degree of knowledge, specialization, and proficiency impacting how efficient and effective they address challenges within their domains and its interfaces. A subject matter expert is expected to become a master at their craftsmanship and promote excellency within their disciplines. People focusing on Subject Matter Expertise wish to deepen their domain knowledge and become authorities in their fields.",
       "DECTRIS delivers high-tech detectors and wants to further expand its offering to more comprehensive detection and analytics solutions. Inherently, this requires a deep understanding of physics, various engineering disciplines and product development. Just as important are professionals in product management, marketing, administration, human resources, and sales. DECTRIS depends on having subject matter experts that excel in their field/domain.",
       4,

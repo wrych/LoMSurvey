@@ -2,8 +2,8 @@ import { ref, toRef } from "vue";
 import type { Ref } from "vue";
 
 import { useAssessmentStore } from "@/stores/assessment";
-import type { States } from "@/models/State";
 import * as assessmentApi from "@/apis/assessment";
+import * as assessmentSessionApi from "@/apis/assessmentSession";
 import { Assessment, Assessments } from "@/models/Assessment";
 import {
   AssessmentSessions,
@@ -11,6 +11,7 @@ import {
 } from "@/models/AssessmentSession";
 import { Dimension, Dimensions } from "@/models/Dimension";
 import { Levels, type Level } from "@/models/Level";
+import type { States } from "@/models/State";
 
 export class AssessmentRepository {
   private store = useAssessmentStore();
@@ -95,11 +96,11 @@ export class AssessmentRepository {
       this.store.assessmentSessions = new AssessmentSessions([]);
     }
     this.store.assessmentSessions.assessmentSessions[id] =
-      await assessmentApi.getAssessmentSession(id);
+      await assessmentSessionApi.getAssessmentSession(id);
   };
 
   getAssessmentById = (id: number): Ref<Assessment | undefined> => {
-    if (this.store.assessmentSessions?.assessmentSessions[id] === undefined) {
+    if (this.store.assessments?.assessments[id] === undefined) {
       this.updateAssessment(id);
     }
     return toRef(this.store.assessments!.assessments, id);
@@ -113,20 +114,19 @@ export class AssessmentRepository {
       await assessmentApi.getAssessment(id);
   };
 
-  getAllStates = (initOnly: boolean = false): Ref<States | undefined> => {
-    if (this.store.states === undefined && !initOnly) {
-      this.updateStates();
+  getAllAssessmentSessions = (): Ref<AssessmentSessions | undefined> => {
+    if (this.store.assessmentSessions === undefined) {
+      this.updateAssessmentSessions();
     }
-    return toRef(this.store, "states");
+    return toRef(this.store, "assessmentSessions");
   };
 
-  updateStates = async (): Promise<void> => {
-    this.store.states = await assessmentApi.getAllStates();
+  updateAssessmentSessions = async (): Promise<void> => {
+    this.store.assessmentSessions =
+      await assessmentSessionApi.getAssessmentSessions();
   };
 
-  getAllAssessments = (
-    initOnly: boolean = false
-  ): Ref<Assessments | undefined> => {
+  getAllAssessments = (): Ref<Assessments | undefined> => {
     if (this.store.assessments === undefined) {
       this.updateAssessments();
     }
@@ -135,6 +135,17 @@ export class AssessmentRepository {
 
   updateAssessments = async (): Promise<void> => {
     this.store.assessments = await assessmentApi.getAllAssessments();
+  };
+
+  getAllStates = (): Ref<States | undefined> => {
+    if (this.store.assessments === undefined) {
+      this.updateStates();
+    }
+    return toRef(this.store, "states");
+  };
+
+  updateStates = async (): Promise<void> => {
+    this.store.states = await assessmentSessionApi.getAllStates();
   };
 }
 

@@ -13,19 +13,25 @@ import * as assessmentSessionApi from "@/apis/assessmentSession";
 import type { ValueReasoning } from "@/models/ValueReasoning";
 import type { LevelWeight } from "@/models/LevelWeight";
 import type { WeightReasoning } from "@/models/WeightReasoning";
+import { useAuthService, type AuthService } from "./auth";
+import type { AssessmentSessionAuth } from "@/models/AssessmentSessionAuth";
 
 const assessmentService = useAssessmentService();
 
 export class AssessmentSessionService {
   id!: Ref<number>;
   basePath!: Ref<string>;
+  auth!: AuthService;
   repository!: AssessmentSessionRepository;
   assessmentSession = ref<AssessmentSession | undefined>(undefined);
+  permissions = ref<AssessmentSessionAuth | undefined>(undefined);
   assessment = ref<Assessment | undefined>(undefined);
   dimensions = ref<Dimensions | undefined>(undefined);
-  navEntries = computed<{ title: string; path: string }[]>(() => {
-    return this.updateNavEntries(this.basePath.value);
-  });
+  navEntries = computed<{ title: string; path: string; isTopLevel: boolean }[]>(
+    () => {
+      return this.updateNavEntries(this.basePath.value);
+    }
+  );
   levelValues: Record<number, Ref<LevelValue>> = {};
   levelReasonings: Record<number, Ref<ValueReasoning>> = {};
   levelWeights: Record<number, Ref<LevelWeight>> = {};
@@ -34,10 +40,12 @@ export class AssessmentSessionService {
   constructor(
     id: Ref<number>,
     basePath: Ref<string>,
+    auth: AuthService = useAuthService(),
     repository: AssessmentSessionRepository = useAssessmentSessionRepository()
   ) {
     this.id = id;
     this.basePath = basePath;
+    this.auth = auth;
     this.repository = repository;
     watch(
       this.id,
@@ -52,6 +60,7 @@ export class AssessmentSessionService {
     this.assessmentSession = assessmentService.getAssessmentSessionById(
       this.id.value
     );
+    this.getAuthorisation();
     watch(this.assessmentSession, () => {
       if (this.assessmentSession.value) {
         const a = assessmentService.getAssessmentById(
@@ -84,37 +93,55 @@ export class AssessmentSessionService {
     });
   };
 
-  updateNavEntries = (basePath: string) => {
+  updateNavEntries = (
+    basePath: string
+  ): { title: string; path: string; isTopLevel: boolean }[] => {
     const navEntries = [];
     navEntries.push({
       title: "Overview",
+      isTopLevel: true,
       path: `${basePath}/`,
     });
-    if (this.dimensions.value) {
-      Object.values(this.dimensions.value!.dimensions).forEach((d) => {
-        navEntries.push({
-          title: `${d.title} Overview`,
-          path: `${basePath}/dimension/${d.id}`,
+    if (this.permissions.value?.canEdit || true) {
+      console.warn("workaround, fix it!");
+      if (this.dimensions.value) {
+        Object.values(this.dimensions.value!.dimensions).forEach((d) => {
+          navEntries.push({
+            title: `${d.title}`,
+            isTopLevel: true,
+            path: `${basePath}/dimension/${d.id}`,
+          });
+          navEntries.push({
+            title: `${d.title} Level`,
+            path: `${basePath}/dimension/${d.id}/level`,
+          });
+          navEntries.push({
+            title: `${d.title} Reasoning`,
+            path: `${basePath}/dimension/${d.id}/reasoning`,
+          });
         });
-        navEntries.push({
-          title: `${d.title} Level`,
-          path: `${basePath}/dimension/${d.id}/level`,
-        });
-        navEntries.push({
-          title: `${d.title} Reasoning`,
-          path: `${basePath}/dimension/${d.id}/reasoning`,
-        });
+      }
+      navEntries.push({
+        title: "Weights",
+        isTopLevel: true,
+        path: `${basePath}/weights`,
       });
     }
     navEntries.push({
-      title: "Weights",
-      path: `${basePath}/weights`,
-    });
-    navEntries.push({
       title: "Summary",
+      isTopLevel: true,
       path: `${basePath}/summary`,
     });
     return navEntries;
+  };
+
+  getAuthorisation = (): void => {
+    const getPermissions = async () => {
+      this.permissions.value = await assessmentSessionApi.getPermissions(
+        this.id.value
+      );
+    };
+    getPermissions();
   };
 
   getLevels = (

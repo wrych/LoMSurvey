@@ -1,29 +1,20 @@
 <template>
   <main>
-    <div class="assessment-session">
+    <div class="assessment-session" v-if="service.permissions.value?.canView">
       <div>
         <h1 v-if="service.assessment.value">
           {{ service.assessment.value.title }}
         </h1>
         <nav>
           <div class="nav-top">
-            <router-link :to="`${basePath}/`">
-              <div class="link">Overview</div>
-            </router-link>
             <router-link
-              v-if="service.dimensions.value"
-              v-for="dimension in service.dimensions.value.dimensions"
-              :to="`${basePath}/dimension/${dimension.id}`"
+              v-for="entry of service.navEntries.value.filter(
+                (entry) => entry.isTopLevel
+              )"
+              :key="entry.path"
+              :to="entry.path"
             >
-              <div class="link">
-                {{ dimension.title }}
-              </div>
-            </router-link>
-            <router-link :to="`${basePath}/weights`">
-              <div class="link">Weights</div>
-            </router-link>
-            <router-link :to="`${basePath}/summary`">
-              <div class="link">Summary</div>
+              <div class="link" v-if="entry.isTopLevel">{{ entry.title }}</div>
             </router-link>
           </div>
         </nav>
@@ -58,6 +49,12 @@
         </nav>
       </div>
     </div>
+    <div v-else>
+      <p v-if="user">You are not authorized to edit this assessment.</p>
+      <p v-else>
+        Please <a href="/_auth/">log in</a> to access the assessment.
+      </p>
+    </div>
   </main>
 </template>
 
@@ -79,6 +76,7 @@ const assessmentSessionId = computed(() =>
 );
 
 const service = new AssessmentSessionService(assessmentSessionId, basePath);
+const user = service.auth.getUser();
 
 const pageIndex = computed(() =>
   service.navEntries.value.findIndex((entry) => entry.path === route.fullPath)

@@ -16,7 +16,11 @@ export const ensureAuthenticated = (
 };
 
 router.get("/user", (req: Request, res: Response) => {
-  res.status(200).json(req.user ? req.user : null);
+  if (req.isAuthenticated()) {
+    res.status(200).json(req.user!);
+  } else {
+    res.status(200).json(null);
+  }
 });
 
 router.get(

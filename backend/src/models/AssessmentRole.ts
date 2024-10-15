@@ -35,7 +35,7 @@ AssessmentRole.init(
   },
   {
     sequelize: ORM,
-    modelName: "AssessmentRole",
+    modelName: "AssessmentSessionRole",
   }
 );
 

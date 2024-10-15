@@ -44,6 +44,10 @@ app.use(
       checkExpirationInterval: 15 * 60 * 1000, // 15 minutes
       expiration: 24 * 60 * 60 * 1000, // 24 hours
     }),
+    cookie: {
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+    },
   })
 );
 
