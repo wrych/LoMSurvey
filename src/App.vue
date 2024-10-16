@@ -27,10 +27,7 @@ const language = computed(
             <RouterLink :to="`/${language}/dimension/${d.id}`">
               {{ d.name[language] }}
             </RouterLink>
-            <RouterLink
-              :to="`/${language}/dimension/${d.id}/levels`"
-              class="sub-item"
-            >
+            <RouterLink :to="`/${language}/dimension/${d.id}/levels`" class="sub-item">
               {{ textblocks.level_selection[language] }}
             </RouterLink>
           </div>
@@ -55,6 +52,7 @@ const language = computed(
   grid-template-rows: min-content 1fr;
   height: 100vh;
   width: 100vw;
+  padding: 5px
 }
 
 .language-switcher {
@@ -67,7 +65,7 @@ nav {
   display: none;
 }
 
-nav > div {
+nav>div {
   display: grid;
 }
 
