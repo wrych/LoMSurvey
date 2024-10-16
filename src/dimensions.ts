@@ -49,7 +49,7 @@ const ownership = [
         "An IT service technician installs software according to instructions on a client machine.",
       ],
       de: [
-        "Ein Operator montiert Modul-Backs und die Arbeitsanweisungen befolgt. Der Arbeitsplatz des Operators ist für die Aufgabe eingerichtet, und die Teile sind verfügbar.",
+        "Ein Operator montiert Modul-Backs und befolgt die Arbeitsanweisungen. Der Arbeitsplatz des Operators ist für die Aufgabe eingerichtet, und die Teile sind verfügbar.",
         "Ein IT-Service-Techniker installiert Software gemäss Anweisungen auf einem Client-Rechner.",
       ],
     },
@@ -62,7 +62,7 @@ const ownership = [
         "make decisions withing defined and tight parameters.",
       ],
       de: [
-        "führen Aufgaben selbständig aus",
+        "führen Aufgaben selbständig aus.",
         "treffen Entscheidungen innerhalb definierter und enger Parameter.",
       ],
     },
@@ -73,9 +73,9 @@ const ownership = [
         "An IT service technician solves a service desk request after clarifying with the stakeholder.",
       ],
       de: [
-        "Ein HR-Assistent aktualisiert einen Mitarbeiterdatensatz und fragt beim Mitarbeiter nach, falls Informationen fehlen.",
-        "Ein Operator führt Kalibrierungsskripte für die Modulkalibrierung in der X-Box durch.",
-        "Ein IT-Service-Techniker löst eine Service-Desk-Anfrage, nachdem er sich mit dem Stakeholder abgestimmt hat.",
+        "Ein HR-Assistent aktualisiert einen Mitarbeiterdatensatz und fragt bei Mitarbeitern nach, falls Informationen fehlen.",
+        "Ein Operator führt Kalibrierungsskripte für die Modulkalibrierung in der X-Box aus.",
+        "Ein IT-Service-Techniker löst eine Service-Desk-Anfrage, nachdem er mit dem Stakeholder Ruecksprache gehalten hat.",
       ],
     },
   },
@@ -89,7 +89,7 @@ const ownership = [
         "adapt instructions to variations and assess outcomes.",
       ],
       de: [
-        "führen Aufgaben gemäss Richtlinien selbständig aus.",
+        "führen Aufgaben gemäss Vorgaben selbständig aus.",
         "zeigen Initiative bei der Problemlösung.",
         "treffen Entscheidungen innerhalb vorgegebener Parameter.",
         "passen Anweisungen an Variationen an und bewerten Ergebnisse.",
@@ -129,8 +129,8 @@ const ownership = [
         "A R&D scientist plans and executes the characterisation of a new sensor material on an existing ASIC with input from colleagues.",
       ],
       de: [
-        "Ein Mitarbeiter im Support findet eine Lösung, die den unmittelbaren Kundenbedarf befriedigen, wobei er auf interne und externe Ressourcen zugreift.",
-        "Ein Ingenieur identifiziert Domänenbedürfnisse, indem er Feedback von Stakeholdern sammelt, es z. B. einer SWOT-Analyse zuordnet, priorisiert und die relevanten Themen anspricht.",
+        "Ein Support-Mitarbeiter findet eine Lösung, die den unmittelbaren Kundenbedarf befriedigen, wobei er auf interne und externe Ressourcen zugreift.",
+        "Ein Ingenieur identifiziert Domänenbedürfnisse, indem er Feedback von Stakeholdern sammelt, es z.B. in einer SWOT-Analyse dokumentiert, priorisiert und die relevanten Themen angeht.",
         "Ein F&E-Wissenschaftler plant und führt die Charakterisierung eines neuen Sensormaterials auf einem vorhandenen ASIC mit Input von Kollegen durch.",
       ],
     },
@@ -143,7 +143,7 @@ const ownership = [
         "take accountability for their contributions and its impact on DECTRIS.",
       ],
       de: [
-        "leiten Projekte ohne Anleitung.",
+        "leiten Projekte ohne Begleitung.",
         "übernehmen Verantwortung für ihre Beiträge und deren Auswirkungen auf DECTRIS.",
       ],
     },
@@ -168,8 +168,8 @@ const ownership = [
         "take proactive steps to address critical topics in peripheral areas.",
       ],
       de: [
-        "übernehmen Verantwortung für die Beiträge ihres Bereichs und deren Auswirkungen auf DECTRIS.",
-        "ergreifen proaktive Maßnahmen, um kritische Themen in peripheren Bereichen anzugehen.",
+        "übernehmen Verantwortung für die Beiträge ihrer Domäne und deren Auswirkungen auf DECTRIS.",
+        "ergreifen proaktive Massnahmen, um kritische Themen in angrenzenden Bereichen anzugehen.",
       ],
     },
     examples: {
@@ -179,7 +179,7 @@ const ownership = [
       ],
       de: [
         "Ein Softwareingenieur übernimmt die Verantwortung für das Build-System und pflegt und verbessert es kontinuierlich.",
-        "Ein Maschinenbauingenieur erkennt ein Verbesserungspotenzial im Gespräch mit einem Bediener, setzt Änderungen zur Behebung des Problems um und erstellt Best-Practice-Dokumentationen für ähnliche Fälle in der Zukunft.",
+        "Ein Maschinenbauingenieur erkennt ein Verbesserungspotenzial im Gespräch mit einem Operator, setzt Änderungen zur Behebung des Problems um und erstellt Best-Practice-Dokumentationen für ähnliche Fälle in der Zukunft.",
       ],
     },
   },
@@ -191,8 +191,8 @@ const ownership = [
         "take proactive steps to ensure success across multiple domains.",
       ],
       de: [
-        "übernehmen Verantwortung für das Ergebnis über mehrere Bereiche hinweg.",
-        "ergreifen proaktive Maßnahmen, um den Erfolg in mehreren Bereichen sicherzustellen.",
+        "übernehmen Verantwortung für das Ergebnis über mehrere Domänen hinweg.",
+        "ergreifen proaktive Massnahmen, um den Erfolg in mehreren Domänen sicherzustellen.",
       ],
     },
     examples: {
@@ -202,7 +202,7 @@ const ownership = [
         "A product manager ensures the product line's alignment with the market and actively manages its life cycle.",
       ],
       de: [
-        "Ein Projektmanager übernimmt die Verantwortung für ein gesamtes Produktprojekt und findet kreative Lösungen, um die Markteinführungszeit zu verkürzen.",
+        "Ein Projektleiter übernimmt die Verantwortung für ein gesamtes Produktprojekt und findet kreative Lösungen, um die Markteinführungszeit zu verkürzen.",
         "Ein Marketingmanager überwacht und koordiniert Marketingaktivitäten und stellt deren Ausrichtung an der DECTRIS-Strategie sicher.",
         "Ein Produktmanager stellt die Ausrichtung der Produktlinie am Markt sicher und managt aktiv deren Lebenszyklus.",
       ],
@@ -217,7 +217,7 @@ const ownership = [
       ],
       de: [
         "übernehmen die Verantwortung für einen strategisch kritischen Aspekt des Unternehmens.",
-        "proaktiv strategische Initiativen vorschlagen, planen und umsetzen, die das gesamte Unternehmen betreffen.",
+        "schlagen proaktiv strategische Initiativen vor die das gesamte Unternehmen betreffen, planen und setzten dies um.",
       ],
     },
     examples: {
@@ -227,7 +227,7 @@ const ownership = [
       ],
       de: [
         "Ein Mitglied des Flow-Teams führt einen neuen Entwicklungsprozess ein und stellt sicher, dass der neue Prozess die Markteinführungszeit verkürzt.",
-        "Ein ASIC-Designer übernimmt die Verantwortung für das gesamte ASIC-Portfolio, überwacht dessen Implementierung und koordiniert sich mit Stakeholdern und externen Partnern.",
+        "Ein ASIC-Designer übernimmt die Verantwortung für das gesamte ASIC-Portfolio, begleitet dessen Implementierung und koordiniert mit Stakeholdern und externen Partnern.",
       ],
     },
   },
@@ -262,7 +262,7 @@ const sme = [
         "An operator has completed secondary school before starting his professional career at DECTRIS.",
       ],
       de: [
-        "Ein Operator hat die Sekundarschule abgeschlossen, bevor er seine berufliche Laufbahn bei DECTRIS begann.",
+        "Ein Operator hat die Sekundarschule abgeschlossen, bevor er seine berufliche Laufbahn bei DECTRIS beginnt.",
       ],
     },
   },
@@ -283,15 +283,15 @@ const sme = [
       ],
       de: [
         "Ein IT-Supporter kommt zu DECTRIS, nachdem er seine Lehre abgeschlossen hat.",
-        "Ein Operator kommt zu DECTRIS, nachdem er 5 Jahre in einer ähnlichen Position gearbeitet hat. Sie haben keine Lehre abgeschlossen.",
+        "Ein Operator kommt zu DECTRIS, nachdem er 5 Jahre in einer ähnlichen Position gearbeitet hat. Er/Sie hat keine Lehre abgeschlossen.",
       ],
     },
   },
   {
     value: 6,
     capabilities: {
-      en: ["experienced professionals."],
-      de: ["erfahrene Fachkräfte."],
+      en: ["are experienced professionals."],
+      de: ["sind erfahrene Fachkräfte."],
     },
     examples: {
       en: [
@@ -302,7 +302,7 @@ const sme = [
       de: [
         "Ein Operator, der eine Weiterbildung besucht hat und Erfahrung in einem bestimmten Sicherheitsthema hat.",
         "Ein Softwareingenieur kommt zu DECTRIS, nachdem er sein Studium an der HF/TS/FMS abgeschlossen hat.",
-        "Ein Marketing-Spezialist kommt in Teilzeit zu DECTRIS, während er seinen Bachelor-Abschluss macht.",
+        "Ein Marketing-Spezialist arbeitet Teilzeit bei DECTRIS, während er seinen Bachelor-Abschluss macht.",
       ],
     },
   },
@@ -312,12 +312,12 @@ const sme = [
       en: [
         "rely on practical experience in some area of their domain.",
         "have in-depth knowledge on specialized topics.",
-        "have extended experience or advanced vocational training.",
+        "have extended experience, advanced vocational, or academical training.",
       ],
       de: [
         "verlassen sich auf praktische Erfahrung in einem Bereich ihrer Domäne.",
         "haben tiefgehendes Wissen zu spezialisierten Themen.",
-        "haben erweiterte Erfahrung oder eine fortgeschrittene berufliche Ausbildung.",
+        "haben erweiterte Erfahrung, hoehere berufliche oder akademische Ausbildung.",
       ],
     },
     examples: {
@@ -355,10 +355,10 @@ const sme = [
         "A R&D scientist joins DECTRIS after completing their PhD in detector physics.",
       ],
       de: [
-        "Ein Produktingenieur erklärt den Entwicklern, wie DECTRIS-Kunden Detektoren verwenden.",
+        "Ein Produktingenieur erklärt Entwicklern, wie DECTRIS-Kunden Detektoren verwenden.",
         "Ein Softwareingenieur vertritt das Team in einem Quartalsziel (QT) und berät bei spezifischen Architekturentscheidungen.",
         "Ein Entwicklungsingenieur fungiert als Ansprechpartner für Strahlungssimulationen.",
-        "Ein F&E-Wissenschaftler kommt zu DECTRIS, nachdem er seinen Doktortitel in Detektorphysik abgeschlossen hat.",
+        "Ein F&E-Wissenschaftler kommt zu DECTRIS, nachdem er seine Promotion in Detektorphysik abgeschlossen hat.",
       ],
     },
   },
@@ -366,13 +366,13 @@ const sme = [
     value: 9,
     capabilities: {
       en: [
-        "experienced technical experts for their domain.",
+        "are experienced technical experts for their domain.",
         "represent their domain expertise in projects.",
         "mentor more junior peers in their professional development.",
       ],
       de: [
-        "erfahrene technische Experten für ihre Domäne.",
-        "vertreten ihre Fachkenntnisse in Projekten.",
+        "sind erfahrene technische Experten für ihre Domäne.",
+        "vertreten ihre Fachwissen in Projekten.",
         "mentoren jüngere Kollegen in ihrer beruflichen Entwicklung.",
       ],
     },
@@ -385,7 +385,7 @@ const sme = [
       de: [
         "Ein Elektroingenieur leistet kritische Beiträge zu einem Produktentwicklungsprojekt und trägt mit umfassendem Fachwissen bei.",
         "Ein Produktmanager behält einen informierten Überblick über alle Aktivitäten, die den EM-Markt betreffen.",
-        "Ein Vertriebsleiter kennt die Wettbewerber und Dynamiken in einem bestimmten Markt und implementiert gezielte Verkaufsstrategien, um den Marktanteil zu erhöhen.",
+        "Ein Vertriebsmanager kennt die Wettbewerber und Dynamiken in einem bestimmten Markt und implementiert gezielte Verkaufsstrategien, um den Marktanteil zu erhöhen.",
       ],
     },
   },
@@ -399,9 +399,9 @@ const sme = [
         "monitor trends in their field and analyze their applicability at DECTRIS.",
       ],
       de: [
-        "dienen als autoritative Stimmen in ihrem Fachgebiet.",
-        "werden bei Entscheidungen von großer Bedeutung konsultiert.",
-        "viele Jahre Erfahrung in ihrem Fachgebiet und dessen Schnittstellen.",
+        "dienen als massgebliche Stimmen in ihrem Fachgebiet.",
+        "werden bei Entscheidungen von grosser Bedeutung konsultiert.",
+        "haben viele Jahre Erfahrung in ihrem Fachgebiet und dessen Schnittstellen.",
         "beobachten Trends in ihrem Bereich und analysieren deren Anwendbarkeit bei DECTRIS.",
       ],
     },
@@ -412,9 +412,9 @@ const sme = [
         "A development engineer critically contributes to a development project in multiple phases and multiple domains.",
       ],
       de: [
-        "Ein Business Analyst trägt mit seinem umfangreichen Fachwissen und seiner Erfahrung maßgeblich zur Entwicklung und Implementierung eines neuen Prozesses in Zusammenarbeit mit dem Finanzteam bei.",
-        "Ein Produktmanager leitet die Definition der Strategie für den Labormarkt mit seinem herausragenden Verständnis des Marktes und der Dynamik darin.",
-        "Ein Entwicklungsingenieur trägt maßgeblich zu einem Entwicklungsprojekt in mehreren Phasen und mehreren Bereichen bei.",
+        "Ein Business Analyst trägt mit seinem umfangreichen Fachwissen und seiner Erfahrung massgeblich zur Entwicklung und Implementierung eines neuen Prozesses in Zusammenarbeit mit dem Finanzteam bei.",
+        "Ein Produktmanager leitet die Definition der Strategie für den Labormarkt mit seinem herausragenden Verständnis des Marktes und dessen Dynamik.",
+        "Ein Entwicklungsingenieur trägt massgeblich in mehreren Phasen und mehreren Bereichen zu einem Entwicklungsprojekt bei.",
       ],
     },
   },
@@ -426,7 +426,7 @@ const sme = [
         "substantially advance their field with important inputs, ideas or solutions.",
       ],
       de: [
-        "werden als außergewöhnliche Experten in ihrem Fachgebiet und dessen Randbereichen anerkannt.",
+        "werden als aussergewöhnliche Experten in ihrem Fachgebiet und dessen Randbereichen anerkannt.",
         "bringen ihr Fachgebiet mit wichtigen Beiträgen, Ideen oder Lösungen erheblich voran.",
       ],
     },
@@ -435,7 +435,7 @@ const sme = [
         "An ASIC designer supports his team with outstanding knowledge about designing radiation hard chips in a smaller node.",
       ],
       de: [
-        "Ein ASIC-Designer unterstützt sein Team mit herausragendem Wissen über das Design strahlungsfester Chips in einem kleineren Knoten.",
+        "Ein ASIC-Designer unterstützt sein Team mit herausragendem Wissen über das Design strahlungsfester Chips in einer kleineren Node.",
       ],
     },
   },
@@ -449,7 +449,7 @@ const sme = [
       ],
       de: [
         "werden als Vordenker in ihrer Branche anerkannt.",
-        "prägen Trends und setzen Maßstäbe für Exzellenz.",
+        "prägen Trends und setzen Massstäbe für Exzellenz.",
         "zeigen visionäre technische Führung.",
       ],
     },
@@ -464,8 +464,8 @@ const leadership = [
   {
     value: 4,
     capabilities: {
-      en: ["no leadership responsibilities."],
-      de: ["keine Führungsverantwortung."],
+      en: ["have no leadership responsibilities."],
+      de: ["haben keine Führungsverantwortung."],
     },
     examples: {
       en: ["no example"],
@@ -483,7 +483,7 @@ const leadership = [
         "An employee proactively acknowledges a mistake they made and looks for solutions with colleagues.",
       ],
       de: [
-        "Ein Mitarbeiter erkennt proaktiv einen Fehler, den er gemacht hat, und sucht nach Lösungen mit Kollegen.",
+        "Ein Mitarbeiter erkennt einen Fehler, den er gemacht hat, und sucht proaktiv nach Lösungen mit Kollegen.",
       ],
     },
   },
@@ -495,8 +495,8 @@ const leadership = [
         "start taking leadership responsibilities in the domain.",
       ],
       de: [
-        "stimmen sich mit einem Kollegen ab und treiben Fortschritte in Richtung gemeinsamer Ziele voran.",
-        "übernehmen erste Führungsverantwortung im Bereich.",
+        "stimmen sich mit einem Kollegen ab und treiben Fortschritte in Richtung gemeinsamer Ziele.",
+        "übernehmen erste Führungsverantwortung in ihrer Domäne.",
       ],
     },
     examples: {
@@ -505,8 +505,8 @@ const leadership = [
         "An employee presents their domain to somebody who freshly joined DECTRIS.",
       ],
       de: [
-        "Ein Mitarbeiter koordiniert die Urlaubs- oder Arbeitsbelastung des Teams und stellt sicher, dass immer jemand anwesend ist.",
-        "Ein Mitarbeiter stellt einem neuen Kollegen seinen Bereich vor, der gerade bei DECTRIS angefangen hat.",
+        "Ein Mitarbeiter koordiniert die Urlaubs- oder Arbeitsauslastung des Teams und stellt sicher, dass immer jemand anwesend ist.",
+        "Ein Mitarbeiter stellt einem neuen Kollegen, der gerade bei DECTRIS angefangen hat, seinen Bereich vor.",
       ],
     },
   },
@@ -518,8 +518,8 @@ const leadership = [
         "align in a smaller group and drive progress toward shared objectives.",
       ],
       de: [
-        "übernehmen die Führung für ein spezifisches Thema im Bereich und treiben Fortschritte voran.",
-        "stimmen sich in einer kleineren Gruppe ab und treiben Fortschritte in Richtung gemeinsamer Ziele voran.",
+        "übernehmen die Führung für ein spezifisches Thema in der Domäne und treiben das Thema voran.",
+        "stimmen sich in einer kleineren Gruppe ab und erarbeiten Fortschritt in Richtung gemeinsamer Ziele.",
       ],
     },
     examples: {
@@ -541,8 +541,8 @@ const leadership = [
         "inspire domain to collaborate toward shared objectives and drive progress.",
       ],
       de: [
-        "gemeinsame Ziele im Bereich oder Projekt mitgestalten und deren Umsetzung koordinieren.",
-        "den Bereich inspirieren, auf gemeinsame Ziele hinzuarbeiten und Fortschritte voranzutreiben.",
+        "gestalten und koordinieren die Umsetzung gemeinsamer Ziele im Bereich oder Projekt",
+        "inspiereren die Domäne, auf gemeinsame Ziele hinzuarbeiten und Fortschritte voranzutreiben.",
       ],
     },
     examples: {
@@ -553,7 +553,7 @@ const leadership = [
       ],
       de: [
         "Ein Mitarbeiter organisiert mehrere Veranstaltungen von der Einladung bis zur Durchführung für DECTRIS X.",
-        "Ein Marketing-Spezialist leitet eine Verbesserungsinitiative im Bereich.",
+        "Ein Marketing-Spezialist leitet eine Verbesserungsinitiative in seiner Domäne.",
         "Ein Compliance-Beauftragter koordiniert eine Arbeitsgruppe und inspiriert die Mitglieder, die Ziele der Gruppe zu erreichen.",
       ],
     },
@@ -566,8 +566,8 @@ const leadership = [
         "inspire people for shared objectives across domains and drive progress.",
       ],
       de: [
-        "gemeinsame Ziele über verschiedene Bereiche hinweg mitgestalten und deren Umsetzung koordinieren.",
-        "Menschen für gemeinsame Ziele über verschiedene Bereiche hinweg inspirieren und Fortschritte vorantreiben.",
+        "gestalten gemeinsame Ziele über verschiedene Domänen hinweg mit und koordinieren deren Umsetzung.",
+        "begeistern Kollegen für gemeinsame Ziele über verschiedene Domänen hinweg und treiben Fortschritte voran.",
       ],
     },
     examples: {
@@ -576,8 +576,8 @@ const leadership = [
         "A stream coordinator inspires the C2C value stream and stakeholders from M2M to collaborate toward improving a critically low yield of a product and drive progress.",
       ],
       de: [
-        "Ein Feldsystemingenieur erkennt, dass Kunden und Vertriebspartner Schwierigkeiten bei der Konfiguration und Installation der Detektoren haben, implementiert einen Workflow zur Unterstützung der Konfiguration und zur Gewinnung von Feedback; dann sammelt er interne und externe Ressourcen, um Schulungsmaterial zu erstellen und relevante Produktänderungen anzustoßen.",
-        "Ein Stream-Koordinator inspiriert den C2C-Wertstrom und Stakeholder von M2M zur Zusammenarbeit, um den kritisch niedrigen Ertrag eines Produkts zu verbessern und Fortschritte voranzutreiben.",
+        "Ein Support-Mitarbeiter erkennt, dass Kunden und Vertriebspartner Schwierigkeiten bei der Konfiguration und Installation der Detektoren haben, implementiert einen Workflow zur Unterstützung der Konfiguration und zur Gewinnung von Feedback; er sammelt interne und externe Unterstützung, um Schulungsmaterial zu erstellen und relevante Produktänderungen anzustossen.",
+        "Ein Stream-Koordinator inspiriert den C2C-Wertstrom und Stakeholder von M2M zur Zusammenarbeit, um den kritisch niedrigen Yield eines Produkts zu verbessern und Fortschritte voranzutreiben.",
       ],
     },
   },
@@ -616,7 +616,7 @@ const leadership = [
       ],
       de: [
         "geben Richtung für Segmente des Unternehmens oder kritische strategische Themen vor.",
-        "vertreten die Vision und Werte von DECTRIS im Unternehmen und nach außen.",
+        "vertreten die Vision und Werte von DECTRIS im Unternehmen und nach aussen.",
         "inspirieren das Unternehmen, sich gemeinsamen Zielen zu verpflichten.",
       ],
     },
@@ -662,7 +662,7 @@ const collaboration = [
         "An operator, who assembles modules, coordinates with colleagues according for the use of available machines.",
       ],
       de: [
-        "Ein Operator, der Module montiert, koordiniert sich mit Kollegen bezüglich der Nutzung der verfügbaren Maschinen.",
+        "Ein Operator, der Module montiert, koordiniert mit Kollegen bezüglich der Nutzung der verfügbaren Maschinen.",
       ],
     },
   },
@@ -700,7 +700,7 @@ const collaboration = [
       de: [
         "arbeiten kollaborativ und in direktem Kontakt mit Mitgliedern anderer Teams.",
         "bearbeiten Anfragen und tragen zu Teamentscheidungen bei.",
-        "führen neue Kollegen ein.",
+        "arbeiten neue Kollegen ein.",
       ],
     },
     examples: {
@@ -709,8 +709,8 @@ const collaboration = [
         "A recruiting assistant collaborates with the team that opened the position, gathering the necessary information to accurately post a new job opening.",
       ],
       de: [
-        "Ein Operator stößt auf ein wiederkehrendes Problem mit dem Betrieb der Röntgenröhre, informiert den Laborverantwortlichen, diskutiert das Problem und bestätigt, dass die Röhre nach der Reparatur normal funktioniert.",
-        "Ein Recruiting-Assistent arbeitet mit dem Team zusammen, das die Position eröffnet hat, sammelt die notwendigen Informationen, um eine neue Stellenausschreibung genau zu veröffentlichen.",
+        "Ein Operator stösst auf ein wiederkehrendes Problem mit dem Betrieb der Röntgenröhre, informiert den Laborverantwortlichen, diskutiert das Problem und bestätigt, dass die Röhre nach der Reparatur normal funktioniert.",
+        "Ein Recruiting-Assistent arbeitet mit dem Team zusammen, das eine Stelle auschreibt, sammelt die notwendigen Informationen, um eine neue Stellenausschreibung genau zu veröffentlichen.",
       ],
     },
   },
@@ -737,7 +737,7 @@ const collaboration = [
       de: [
         "Ein Mitarbeiter nimmt an Peer-Reviewed Self-Reflections eines engen Kollegen teil und bietet Feedback zur Unterstützung von Wachstum und kontinuierlicher Verbesserung.",
         "Ein Mitarbeiter nimmt aktiv an Team-Retrospektiven teil und engagiert sich in Einzelgesprächen mit Kollegen, um persönliche Spannungen zu erkennen und frühzeitig zu besprechen.",
-        "Ein Mitarbeiter beteiligt sich an Konsensdiskussionen, äußert eigene Bedenken oder Einwände gegen Vorschläge und verpflichtet sich zur Entscheidung.",
+        "Ein Mitarbeiter beteiligt sich an Konsentdiskussionen, äussert eigene Bedenken oder Einwände gegen Vorschläge und verpflichtet sich zur Entscheidung.",
       ],
     },
   },
@@ -763,8 +763,8 @@ const collaboration = [
         "An employee engages in multi-team consent discussions, expressing own concerns or objections to proposals and committing to the decision.",
       ],
       de: [
-        "Ein Produktingenieur reagiert auf Spannungen im Zusammenhang mit Ressourcenmangel bei einer dringenden bereichsübergreifenden Änderungsanforderung und verhandelt die Priorisierung mit minimalen Auswirkungen auf andere Aktivitäten.",
-        "Ein Mitarbeiter beteiligt sich an Konsensdiskussionen zwischen mehreren Teams, äußert eigene Bedenken oder Einwände gegen Vorschläge und verpflichtet sich zur Entscheidung.",
+        "Ein Produktingenieur reagiert auf Spannungen im Zusammenhang mit Ressourcenmangel bei einer dringenden bereichsübergreifenden Engineering Change Request und verhandelt die Priorisierung mit minimalen Auswirkungen auf andere Aktivitäten.",
+        "Ein Mitarbeiter beteiligt sich an Konsentdiskussionen zwischen mehreren Teams, äussert eigene Bedenken oder Einwände gegen Vorschläge und trgät zur Einhaltung der Vereinbarung bei.",
       ],
     },
   },
@@ -789,7 +789,7 @@ const collaboration = [
         "A team sponsor guides the team towards self-organization practices and introduces S3.0 patterns.",
       ],
       de: [
-        "Ein Teammitglied steht Kollegen zur Verfügung, wenn sie Probleme besprechen müssen, bietet Unterstützung und Motivation, um Maßnahmen zu ergreifen und die Situation zu verbessern.",
+        "Ein Teammitglied steht Kollegen zur Verfügung, wenn sie Probleme besprechen müssen, bietet Unterstützung und motiviert den Kollgen Massnahmen zu ergreifen und die Situation zu verbessern.",
         "Ein Mitarbeiter moderiert operative und Governance-Meetings des Teams und stellt sicher, dass jeder den Raum hat, sich und seine Meinungen sicher auszudrücken.",
         "Ein Team-Sponsor führt das Team zu Selbstorganisationspraktiken und führt S3.0-Muster ein.",
       ],
@@ -817,7 +817,7 @@ const collaboration = [
         "A PMO member negotiates between multiple teams and projects to find ideal solutions for DECTRIS and all parties involved.",
       ],
       de: [
-        "Ein PAT-Mitglied vermittelt bei Eskalationen zwischen Parteien, indem es die Diskussionen moderiert. Sie sorgen dafür, dass sich jeder gehört und verstanden fühlt und ermöglichen es den Parteien, ihre Differenzen selbst zu klären, während sie eine schnelle Lösung sicherstellen.",
+        "Ein PAT-Mitglied vermittelt bei Eskalationen zwischen Parteien, indem es die Diskussionen moderiert. Sie sorgt dafür, dass sich jeder gehört und verstanden fühlt und ermöglichen es den Parteien, ihre Differenzen selbst zu klären, während sie eine schnelle Lösung sicherstellt.",
         "Ein PMO-Mitglied verhandelt zwischen mehreren Teams und Projekten, um ideale Lösungen für DECTRIS und alle beteiligten Parteien zu finden.",
       ],
     },
@@ -839,7 +839,7 @@ const collaboration = [
         "A trust team member works on an initiative improving appreciation and appraisal mechanisms including multiple topics.",
       ],
       de: [
-        "Ein Mitglied des Vertrauenteams arbeitet an einer Initiative zur Verbesserung von Anerkennungs- und Bewertungsmechanismen, die mehrere Themen umfasst.",
+        "Ein Mitglied des Trust-Teams arbeitet an einer Initiative zur Verbesserung von Anerkennungs- und Bewertungsmechanismen, die mehrere Themen umfasst.",
       ],
     },
   },
@@ -861,7 +861,7 @@ const communication = [
         "An employee who assembles modules participates in daily meetings, communicates the status of own activities, any problems encountered, and requests advice when needed.",
       ],
       de: [
-        "Ein Mitarbeiter, der Module montiert, nimmt an täglichen Meetings teil, kommuniziert den Status seiner eigenen Aktivitäten, aufgetretene Probleme und bittet bei Bedarf um Rat.",
+        "Ein Mitarbeiter, der Module montiert, nimmt an Dailies teil, kommuniziert den Status seiner eigenen Aktivitäten, aufgetretene Probleme und bittet bei Bedarf um Rat.",
       ],
     },
   },
@@ -910,7 +910,7 @@ const communication = [
       ],
       de: [
         "Ein Einkaufsspezialist bespricht die Produktionsbedürfnisse mit den Ingenieuren und bietet Vorschläge zur Optimierung des Beschaffungsprozesses an.",
-        "Ein Operator, der regelmäßig Module in der X-Box kalibriert, schlägt im Team eine Idee zur Prozessverbesserung vor und diskutiert diese.",
+        "Ein Operator, der regelmässig Module in der X-Box kalibriert, schlägt im Team eine Idee zur Prozessverbesserung vor und diskutiert diese.",
         "Ein Prozessverantwortlicher schult Operatoren im Umgang mit neuer Hardware und dokumentiert die Nutzung und die Lösung von Problemen im Wiki.",
       ],
     },
@@ -924,9 +924,9 @@ const communication = [
         "organize and conduct meetings according to 'Guideline meetings'.",
       ],
       de: [
-        "sind in der Lage, das Gesamtbild, die Motivation, die Begründung und die Gründe hinter ihren Entscheidungen zu kommunizieren.",
+        "sind in der Lage, das Gesamtbild, die Motivation und die Hintergründe ihren Entscheidungen zu kommunizieren.",
         "sorgen für Transparenz und helfen anderen zu verstehen, warum bestimmte Entscheidungen getroffen wurden, durch gut strukturierte schriftliche Dokumentation.",
-        "organisieren und führen Meetings gemäß den 'Richtlinien für Meetings' durch.",
+        "organisieren und führen Meetings gemäss den 'Richtlinien für Meetings' durch.",
       ],
     },
     examples: {
@@ -938,10 +938,10 @@ const communication = [
         "An IT specialist promptly responds to business-critical system failures, providing timely communication.",
       ],
       de: [
-        "Ein Feldsystemingenieur trägt zur Definition eines Prozesses bei. Sie dokumentieren die Prozessänderungen und präsentieren sie den betroffenen Teams.",
-        "Ein Projektleiter eines QT klärt die Projektrichtung und Entscheidungen für Stakeholder und Teammitglieder.",
-        "Ein F&E-Wissenschaftler überprüft nach der Teilnahme an einer Konferenz die technischen Highlights und präsentiert diese während des 'Technology Scouting Meetings', um Informationen zu teilen, die für das Unternehmen relevant sein könnten.",
-        "Ein HR-Spezialist informiert die Mitarbeiter über neue HR-Vorschriften und aktualisiert regelmäßig die Onboarding-Materialien.",
+        "Ein Feldsystemingenieur trägt zur Definition eines Prozesses bei. Sie dokumentiert die Prozessänderungen und präsentiert sie den betroffenen Teams.",
+        "Ein Projektleiter eines QT klärt die Projektrichtung und trifft Entscheidungen mit den Stakeholder und Teammitglieder.",
+        "Ein F&E-Wissenschaftler fasst nach der Teilnahme an einer Konferenz die technischen Highlights zusammen und präsentiert diese während des 'Technology Scouting Meetings', um Informationen zu teilen, die für das Unternehmen relevant sein könnten.",
+        "Ein HR-Spezialist informiert die Mitarbeiter über neue HR-Vorschriften und aktualisiert regelmässig die Onboarding-Materialien.",
         "Ein IT-Spezialist reagiert umgehend auf geschäftskritische Systemausfälle und sorgt für eine zeitnahe Kommunikation.",
       ],
     },
@@ -967,7 +967,7 @@ const communication = [
         "A safety officer compiles training materials and conducts internal training sessions.",
       ],
       de: [
-        "Ein Projektmanager des EM-Marktes verhandelt regelmäßig mit internen Stakeholdern und potenziellen externen Kunden, um die Anforderungen für eine neue EM-Detektorspezifikation zu definieren.",
+        "Ein Projektleiter des EM-Marktes verhandelt regelmässig mit internen Stakeholdern und potenziellen externen Kunden, um die Anforderungen für eine neue EM-Detektorspezifikation zu definieren.",
         "Ein Wertstromingenieur leitet bereichsübergreifende Meetings, um Produktionsherausforderungen zu bewältigen und Lösungen zu entwickeln.",
         "Ein Sicherheitsbeauftragter erstellt Schulungsmaterialien und führt interne Schulungen durch.",
       ],
@@ -983,24 +983,24 @@ const communication = [
         "ensure every voice is heard and inputs are correctly understood.",
       ],
       de: [
-        "moderieren Diskussionen über verschiedene Bereiche hinweg.",
+        "moderieren Diskussionen über verschiedene Domänen hinweg.",
         "zeigen Selbstvertrauen beim Sprechen vor einem breiten Publikum, sei es in Schulungssitzungen oder Wissensaustausch-Meetings.",
         "zeigen Selbstvertrauen beim Schreiben formeller Berichte, Schulungsmaterialien oder Wissensaustausch-Dokumentationen.",
-        "stellen sicher, dass jede Stimme gehört wird und Eingaben korrekt verstanden werden.",
+        "stellen sicher, dass jede Stimme gehört wird und Anmerkungen korrekt verstanden werden.",
       ],
     },
     examples: {
       en: [
         "An ICT system engineer leads discussions across departments to align IT services.",
-        "A product owner who has to replace a production-critical system involves relevant stakeholders (production, sales, and market) in a planning meeting to discuss the impact of the change, the optimal timing, and negotiate for minimal necessary downtime.",
+        "A product owner who has to replace a production-critical system involves relevant stakeholders (production, sales, and marketing) in a planning meeting to discuss the impact of the change, the optimal timing, and negotiate for minimal necessary downtime.",
         "A process engineer organizes and moderates a workshop with large group stakeholders to evaluate, discuss and plan the formation of a new team.",
         "A development engineer effectively conveys knowledge and introduces highly complex concepts in an understandable way to a non-technical audience.",
       ],
       de: [
         "Ein ICT-Systemingenieur leitet bereichsübergreifende Diskussionen, um IT-Dienste abzustimmen.",
-        "Ein Produktverantwortlicher, der ein produktionskritisches System ersetzen muss, bezieht relevante Stakeholder (Produktion, Vertrieb und Markt) in ein Planungstreffen ein, um die Auswirkungen der Änderung, den optimalen Zeitpunkt und die Verhandlung für die minimal notwendige Ausfallzeit zu besprechen.",
-        "Ein Prozessingenieur organisiert und moderiert einen Workshop mit einer großen Gruppe von Stakeholdern, um die Bildung eines neuen Teams zu bewerten, zu diskutieren und zu planen.",
-        "Ein Entwicklungsingenieur vermittelt Wissen effektiv und führt hochkomplexe Konzepte auf verständliche Weise einem nicht-technischen Publikum ein.",
+        "Ein Produktverantwortlicher, der ein produktionskritisches System ersetzen muss, bezieht relevante Stakeholder (Produktion, Vertrieb und Markting) in ein Planungstreffen ein, um die Auswirkungen der Änderung, den optimalen Zeitpunkt und die Verhandlung für die minimal notwendige Ausfallzeit zu besprechen.",
+        "Ein Prozessingenieur organisiert und moderiert einen Workshop mit einer grossen Gruppe von Stakeholdern, um die Bildung eines neuen Teams zu bewerten, zu diskutieren und zu planen.",
+        "Ein Entwicklungsingenieur vermittelt Wissen effektiv und erklärt hochkomplexe Konzepte auf verständliche Weise einem nicht-technischen Publikum ein.",
       ],
     },
   },
