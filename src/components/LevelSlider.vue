@@ -4,7 +4,7 @@
     @input="updatemodel"
     type="range"
     min="40"
-    max="120"
+    :max="10 * props.max"
     class="slider"
   />
 </template>
@@ -13,6 +13,9 @@
 import { computed, type ModelRef } from "vue";
 
 const model: ModelRef<number | undefined> = defineModel();
+const props = defineProps({
+  max: { type: Number, default: 12 },
+});
 
 const updatemodel = (event: Event) => {
   if (!event.target) {

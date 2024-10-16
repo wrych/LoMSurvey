@@ -19,7 +19,9 @@ const language = computed(
         <LanguageSwitcher />
       </div>
       <header>
-        <h1 class="highlight">{{ textblocks.level_of_mastery[language] }}</h1>
+        <h1 class="highlight title">
+          {{ textblocks.level_of_mastery[language] }}
+        </h1>
         <nav>
           <div v-for="d in dimensions">
             <RouterLink :to="`/${language}/dimension/${d.id}`">
@@ -57,8 +59,8 @@ const language = computed(
 
 .language-switcher {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 5px;
+  right: 5px;
 }
 
 nav {
@@ -83,6 +85,10 @@ a.router-link-exact-active {
   background-color: var(--color-background-soft);
 }
 
+.title {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   nav {
     display: grid;
@@ -93,6 +99,10 @@ a.router-link-exact-active {
   .content {
     width: 100vw;
     max-width: 1280px;
+  }
+
+  .title {
+    display: block;
   }
 }
 </style>

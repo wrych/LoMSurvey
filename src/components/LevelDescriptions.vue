@@ -75,7 +75,7 @@ const computedStyling = computed(() => {
     } else {
       const diff = cLvl - lvl.value;
       vs[lvl.value] =
-        `top: ${30 * diff + 40}%;left: ${((Math.max(nTop, nBottom) + lvlOffset - Math.round(diff)) * lvlOffset) / 4}%; z-index: ${Math.round(40 - Math.abs(diff) * 10)}`;
+        `top: ${30 * diff + 40}%;left: ${((Math.max(nTop, nBottom) + lvlOffset - Math.round(diff)) * lvlOffset) / 4}%; z-index: ${Math.round(40 - Math.abs(diff) * 10)}; background-color: var(--color-background-mute); border-color: var(--color-highlight);`;
     }
   });
   return vs;
@@ -86,7 +86,6 @@ watch(level, () => {});
 
 <style scoped>
 h3 {
-  color: var(--color-heading);
   cursor: pointer;
 }
 .leveldescriptioncontainer {

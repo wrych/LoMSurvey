@@ -6,7 +6,7 @@
       :language="language"
     />
     <div class="slidercontainer">
-      <LevelSlider v-model="value" />
+      <LevelSlider v-model="value" :max="max" />
       <NumberInput v-model="value" class="number" />
     </div>
   </div>
@@ -17,7 +17,7 @@ import LevelSlider from "./LevelSlider.vue";
 import NumberInput from "./NumberInput.vue";
 import LevelDescriptions from "./LevelDescriptions.vue";
 import { type Dimension } from "@/dimensions";
-import type { PropType } from "vue";
+import { computed, type PropType } from "vue";
 import * as textblocks from "@/textblocks";
 
 const value = defineModel();
@@ -31,6 +31,9 @@ const props = defineProps({
     required: true,
   },
 });
+const max = computed(() =>
+  Math.max(...props.dimension.levels.map((l: { value: number }) => l.value))
+);
 </script>
 
 <style scoped>
