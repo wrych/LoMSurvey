@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import dimensions, { values, type dimensionId } from "@/dimensions";
+import dimensions from "lom-levels";
+import { values } from "@/dimensions";
 import { computed, ref, toRef, watch, type PropType } from "vue";
 import { RouterView } from "vue-router";
 import * as textblocks from "@/textblocks";
@@ -19,7 +20,15 @@ const dimension = computed(() =>
 
 const updateRefs = () => {
   const id = route.params.id;
-  value = toRef(values.value, id as dimensionId);
+  if (typeof id === "string") {
+    value = toRef(
+      values.value,
+      id as
+        | "subject_matter_expertise"
+        | "ownership"
+        | "collaboration_and_communication"
+    );
+  }
 };
 
 watch(() => route.params.id, updateRefs, { immediate: true });

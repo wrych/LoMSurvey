@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type PropType } from "vue";
-import { type Dimension } from "../dimensions";
+import { type Dimension } from "lom-levels";
 import * as textblocks from "../textblocks";
 const props = defineProps({
   dimension: {
@@ -17,8 +17,8 @@ const props = defineProps({
 <template>
   <div v-if="props.dimension">
     <h3>{{ textblocks.description[props.language] }}</h3>
-    <p>{{ props.dimension.description[props.language] }}</p>
+    <p v-html="props.dimension.description[props.language]" />
     <h3>{{ textblocks.impact[props.language] }}</h3>
-    <p>{{ props.dimension.impact[props.language] }}</p>
+    <p v-html="props.dimension.impact[props.language]" />
   </div>
 </template>

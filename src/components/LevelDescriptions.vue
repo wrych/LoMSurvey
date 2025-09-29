@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { type Dimension } from "@/dimensions";
+import { type Dimension } from "lom-levels";
 import { computed, watch, type ModelRef, type PropType } from "vue";
 import * as textblocks from "@/textblocks";
 

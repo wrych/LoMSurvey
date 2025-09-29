@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      alias: "/en",
+      alias: "/latest/en",
       name: "Home EN",
       redirect: {
         name: "Dimension Overview",
@@ -13,7 +13,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/de",
+      path: "/latest/de",
       name: "Home DE",
       redirect: {
         name: "Dimension Overview",
@@ -21,7 +21,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/:language/dimension/:id",
+      path: "/latest/:language/dimension/:id",
       name: "Dimension",
       component: () => import("../views/DimensionView.vue"),
       children: [

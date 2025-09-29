@@ -16,7 +16,7 @@
 import LevelSlider from "./LevelSlider.vue";
 import NumberInput from "./NumberInput.vue";
 import LevelDescriptions from "./LevelDescriptions.vue";
-import { type Dimension } from "@/dimensions";
+import { type Dimension } from "lom-levels";
 import { computed, type PropType } from "vue";
 import * as textblocks from "@/textblocks";
 

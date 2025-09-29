@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView, useRoute } from "vue-router";
-import dimensions from "./dimensions";
+import dimensions from "lom-levels";
 import { computed } from "vue";
 import * as textblocks from "./textblocks";
 import LanguageSwitcher from "./components/LanguageSwitcher.vue";
@@ -24,10 +24,13 @@ const language = computed(
         </h1>
         <nav>
           <div v-for="d in dimensions">
-            <RouterLink :to="`/${language}/dimension/${d.id}`">
+            <RouterLink :to="`/latest/${language}/dimension/${d.id}`">
               {{ d.name[language] }}
             </RouterLink>
-            <RouterLink :to="`/${language}/dimension/${d.id}/levels`" class="sub-item">
+            <RouterLink
+              :to="`/latest/${language}/dimension/${d.id}/levels`"
+              class="sub-item"
+            >
               {{ textblocks.level_selection[language] }}
             </RouterLink>
           </div>
@@ -52,7 +55,7 @@ const language = computed(
   grid-template-rows: min-content 1fr;
   height: 100vh;
   width: 100vw;
-  padding: 5px
+  padding: 5px;
 }
 
 .language-switcher {
@@ -65,7 +68,7 @@ nav {
   display: none;
 }
 
-nav>div {
+nav > div {
   display: grid;
 }
 
@@ -90,7 +93,7 @@ a.router-link-exact-active {
 @media (min-width: 1024px) {
   nav {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
 
