@@ -6,7 +6,6 @@ const router = useRouter();
 
 const updateLanguage = (event: Event) => {
   const newLanguage = (event.target as HTMLSelectElement).value;
-  console.log(newLanguage);
   router.push({
     name: route.name,
     params: { ...route.params, language: newLanguage },

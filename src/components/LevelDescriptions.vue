@@ -1,22 +1,15 @@
 <template>
   <div class="leveldescriptioncontainer">
-    <div
-      v-for="lvl in levels"
-      :id="lvl.value.toString()"
-      :style="computedStyling[lvl.value]"
-      class="leveldescription"
-    >
+    <div v-for="lvl in levels" :id="lvl.value.toString()" :style="computedStyling[lvl.value]" class="leveldescription">
       <h3 @click="selectLevel(lvl.value)">Level {{ lvl.value }}</h3>
-      <span
-        >{{
-          textblocks.capitalitzeFirstLetter(
-            textblocks.employees[props.language]
-          )
-        }}
+      <span>{{
+        textblocks.capitalitzeFirstLetter(
+          textblocks.employees[props.language]
+        )
+      }}
         in
         {{ dimension.name[props.language] }}
-        level {{ lvl.value }}...</span
-      >
+        level {{ lvl.value }}...</span>
       <ul>
         <li v-for="c in lvl.capabilities[props.language]">{{ c }}</li>
       </ul>
@@ -81,18 +74,20 @@ const computedStyling = computed(() => {
   return vs;
 });
 
-watch(level, () => {});
+watch(level, () => { });
 </script>
 
 <style scoped>
 h3 {
   cursor: pointer;
 }
+
 .leveldescriptioncontainer {
   position: relative;
   width: 100%;
   height: 100%;
 }
+
 .leveldescription {
   width: 100%;
   border: solid 1px var(--color-border);

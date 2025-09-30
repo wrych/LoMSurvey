@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import dimensions, { values, type dimensionId } from "@/dimensions";
+import { values, versionedDimensions, type dimensionId } from "@/dimensions";
 import { computed, ref, toRef, watch, type PropType } from "vue";
 import { RouterView } from "vue-router";
 import * as textblocks from "@/textblocks";
 
 const props = defineProps({
+  version: {
+    type: String as PropType<keyof typeof versionedDimensions>,
+    required: true,
+  },
   language: {
     type: String as PropType<textblocks.languageIndicies>,
     required: true,
@@ -14,7 +18,8 @@ const props = defineProps({
 const route = useRoute();
 let value = ref<number | undefined>(undefined);
 const dimension = computed(() =>
-  dimensions.find((d) => d.id === route.params.id)
+  versionedDimensions[props.version].value.find((d) => d.id === route.params.id)
+
 );
 
 const updateRefs = () => {
@@ -29,11 +34,7 @@ watch(() => route.params.id, updateRefs, { immediate: true });
   <main>
     <div v-if="dimension && props.language" class="main">
       <h2>{{ dimension.name[props.language] }}</h2>
-      <RouterView
-        :dimension="dimension"
-        :language="props.language"
-        v-model="value"
-      />
+      <RouterView :dimension="dimension" :language="props.language" v-model="value" />
     </div>
     <div v-else>Error!</div>
   </main>

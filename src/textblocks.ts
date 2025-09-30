@@ -33,6 +33,11 @@ export const employees = {
   de: "Mitarbeiter",
 };
 
+export const messageOfTheDay = {
+  en: `The ${level_of_mastery.en} table has recently been <a href="https://gitlab.k8s.dectris.io/andy.moesch/lomlevels/-/tags">updated</a>.`,
+  de: `The ${level_of_mastery.de} wurde <a href="https://gitlab.k8s.dectris.io/andy.moesch/lomlevels/-/tags">aktualisiert</a>.`,
+};
+
 export type languageIndicies = "en" | "de";
 
 export const capitalitzeFirstLetter = (text: string) => {

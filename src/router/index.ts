@@ -1,3 +1,4 @@
+import { defaultDimensionVersion } from "@/dimensions";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -9,19 +10,15 @@ const router = createRouter({
       name: "Home EN",
       redirect: {
         name: "Dimension Overview",
-        params: { language: "en", id: "ownership" },
+        params: {
+          version: defaultDimensionVersion,
+          language: "en",
+          id: "ownership",
+        },
       },
     },
     {
-      path: "/de",
-      name: "Home DE",
-      redirect: {
-        name: "Dimension Overview",
-        params: { language: "de", id: "ownership" },
-      },
-    },
-    {
-      path: "/:language/dimension/:id",
+      path: "/:version/:language/:id",
       name: "Dimension",
       component: () => import("../views/DimensionView.vue"),
       children: [
